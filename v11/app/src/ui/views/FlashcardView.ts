@@ -202,6 +202,9 @@ export class FlashcardView implements View {
 
 				<div class="filter-group">
 					<label>使用頻度で絞り込み（1=低頻度、5=高頻度）</label>
+					<div class="frequency-guide">
+						5: 最重要・固定 / 4: 実QSO頻出 / 3: 一般語・周辺語 / 2: 低頻度・場面依存 / 1: 古風・特殊・狭義
+					</div>
 					<div class="frequency-filter" id="frequency-filter">
 						${[5, 4, 3, 2, 1].map(freq => `
 							<label class="frequency-checkbox" title="★${freq}: ${frequencyDescriptions[freq]}" tabindex="0">

@@ -587,6 +587,13 @@ body {
 	color: var(--text-color);
 }
 
+.frequency-guide {
+	margin: -4px 0 10px;
+	color: var(--text-light);
+	font-size: 0.9rem;
+	line-height: 1.5;
+}
+
 .tag-filter,
 .frequency-filter {
 	display: flex;
