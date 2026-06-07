@@ -6,6 +6,7 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "tsc && vite build && npm run copy-to-root",
+		"build:check": "npm run build && git -C ../.. diff --exit-code -- v12/index.html v12/flashcard.tsv v12/assets",
 		"copy-to-root": "rm -rf ../assets && cp -r dist/index.html dist/flashcard.tsv dist/assets ../",
 		"preview": "vite preview",
 		"type-check": "tsc --noEmit",
