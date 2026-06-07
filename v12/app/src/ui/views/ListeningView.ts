@@ -50,11 +50,24 @@ interface State {
 	currentCategory: TemplateCategory | 'custom';
 	selectedTemplate: ListeningTemplate | null;
 	isPlaying: boolean;
+	isPaused: boolean;
 	userInput: string;
 	showResult: boolean;
 	showAnswer: boolean;
 	showDialogFormat: boolean;
+	currentPlayingWordIndex: number;
+	currentPlayingSegmentIndex: number;
+	pausedWordIndex: number;
+	pausedSegmentIndex: number;
 }
+
+type ListeningDiff = Array<{
+	type: 'match' | 'replace' | 'delete' | 'insert';
+	correctChar?: string;
+	inputChar?: string;
+	correctIndex: number;
+	inputIndex: number;
+}>;
 
 /**
  * 聞き取り練習ビュークラス
@@ -69,10 +82,15 @@ export class ListeningView implements View {
 		currentCategory: 'qso',
 		selectedTemplate: null,
 		isPlaying: false,
+		isPaused: false,
 		userInput: '',
 		showResult: false,
 		showAnswer: false,
-		showDialogFormat: false
+		showDialogFormat: false,
+		currentPlayingWordIndex: -1,
+		currentPlayingSegmentIndex: -1,
+		pausedWordIndex: -1,
+		pausedSegmentIndex: -1
 	};
 
 	private customTemplates: ListeningTemplate[] = [];
@@ -193,20 +211,27 @@ export class ListeningView implements View {
 		if (!this.state.selectedTemplate || this.state.isPlaying) return;
 
 		this.state.isPlaying = true;
+		this.state.isPaused = false;
 		this.updatePlaybackButtons();
 
-		//! テンプレートに応じて再生（dialogがあればA/B交互、なければcontentを再生）。
-		if (this.state.showDialogFormat && this.state.selectedTemplate.dialog) {
-			//! 対話形式で再生（A側とB側を交互に再生）。
-			await this.playDialogQSO(this.state.selectedTemplate);
-		} else if (this.state.selectedTemplate.content) {
-			//! 通常モードで再生（全体をA側で再生）。
-			const morse = MorseCodec.textToMorse(this.state.selectedTemplate.content);
-			await this.audio.playMorseString(morse);
+		try {
+			//! テンプレートに応じて再生（dialogがあればA/B交互、なければcontentを再生）。
+			if (this.state.selectedTemplate.dialog && this.state.selectedTemplate.dialog.length > 0) {
+				const startSegmentIndex = this.state.pausedSegmentIndex >= 0 ? this.state.pausedSegmentIndex : 0;
+				const startWordIndex = this.state.pausedWordIndex >= 0 ? this.state.pausedWordIndex : 0;
+				await this.playDialogQSO(this.state.selectedTemplate, startSegmentIndex, startWordIndex);
+			} else if (this.state.selectedTemplate.content) {
+				const startWordIndex = this.state.pausedWordIndex >= 0 ? this.state.pausedWordIndex : 0;
+				await this.playTextWordByWord(this.state.selectedTemplate.content, this.audio, startWordIndex);
+			}
+		} finally {
+			if (!this.state.isPaused) {
+				this.state.pausedWordIndex = -1;
+				this.state.pausedSegmentIndex = -1;
+			}
+			this.state.isPlaying = false;
+			this.updatePlaybackButtons();
 		}
-
-		this.state.isPlaying = false;
-		this.updatePlaybackButtons();
 	}
 
 	/**
@@ -229,46 +254,162 @@ export class ListeningView implements View {
 		return key ? t(key) : template.title;
 	}
 
+	private resetPlaybackState(): void {
+		this.state.isPlaying = false;
+		this.state.isPaused = false;
+		this.state.pausedWordIndex = -1;
+		this.state.pausedSegmentIndex = -1;
+		this.state.currentPlayingWordIndex = -1;
+		this.state.currentPlayingSegmentIndex = -1;
+	}
+
+	private getDifference(str1: string, str2: string): ListeningDiff {
+		const len1 = str1.length;
+		const len2 = str2.length;
+		const dp: number[][] = Array(len1 + 1)
+			.fill(null)
+			.map(() => Array(len2 + 1).fill(0));
+
+		for (let i = 0; i <= len1; i++) {
+			dp[i][0] = i;
+		}
+		for (let j = 0; j <= len2; j++) {
+			dp[0][j] = j;
+		}
+
+		for (let i = 1; i <= len1; i++) {
+			for (let j = 1; j <= len2; j++) {
+				if (str1[i - 1] === str2[j - 1]) {
+					dp[i][j] = dp[i - 1][j - 1];
+				} else {
+					dp[i][j] = Math.min(
+						dp[i - 1][j] + 1,
+						dp[i][j - 1] + 1,
+						dp[i - 1][j - 1] + 1
+					);
+				}
+			}
+		}
+
+		const diff: ListeningDiff = [];
+		let i = len1;
+		let j = len2;
+
+		while (i > 0 || j > 0) {
+			if (i > 0 && j > 0 && str1[i - 1] === str2[j - 1]) {
+				diff.unshift({ type: 'match', correctChar: str1[i - 1], inputChar: str2[j - 1], correctIndex: i - 1, inputIndex: j - 1 });
+				i--;
+				j--;
+			} else if (i > 0 && j > 0 && dp[i][j] === dp[i - 1][j - 1] + 1) {
+				diff.unshift({ type: 'replace', correctChar: str1[i - 1], inputChar: str2[j - 1], correctIndex: i - 1, inputIndex: j - 1 });
+				i--;
+				j--;
+			} else if (i > 0 && dp[i][j] === dp[i - 1][j] + 1) {
+				diff.unshift({ type: 'delete', correctChar: str1[i - 1], correctIndex: i - 1, inputIndex: j });
+				i--;
+			} else if (j > 0 && dp[i][j] === dp[i][j - 1] + 1) {
+				diff.unshift({ type: 'insert', inputChar: str2[j - 1], correctIndex: i, inputIndex: j - 1 });
+				j--;
+			}
+		}
+
+		return diff;
+	}
+
+	private async playTextWordByWord(text: string, generator: AudioGenerator, startWordIndex: number = 0): Promise<void> {
+		const words = text.trim().split(/\s+/).filter(word => word.length > 0);
+
+		for (let i = startWordIndex; i < words.length; i++) {
+			if (!this.state.isPlaying) {
+				if (this.state.isPaused) {
+					this.state.pausedWordIndex = i;
+				} else {
+					this.state.currentPlayingWordIndex = -1;
+					this.renderAnswer();
+				}
+				return;
+			}
+
+			this.state.currentPlayingWordIndex = i;
+			this.renderAnswer();
+
+			const morse = MorseCodec.textToMorse(words[i]);
+			await generator.playMorseString(morse);
+
+			if (i < words.length - 1) {
+				await new Promise(resolve => setTimeout(resolve, 150));
+			}
+		}
+
+		if (!this.state.isPaused) {
+			this.state.currentPlayingWordIndex = -1;
+			this.renderAnswer();
+		}
+	}
+
 	/**
 	 * 対話形式のQSOを再生する
 	 * A側とB側を交互に異なる周波数で再生
+	 * 単語単位で再生し、途中で停止可能
 	 * @param template - 再生するテンプレート
+	 * @param startSegmentIndex - 開始するセグメントのインデックス
+	 * @param startWordIndex - 開始する単語のインデックス
 	 */
-	private async playDialogQSO(template: ListeningTemplate): Promise<void> {
+	private async playDialogQSO(template: ListeningTemplate, startSegmentIndex: number = 0, startWordIndex: number = 0): Promise<void> {
 		//! dialogがない場合（テキストカテゴリ）はcontentを再生。
 		if (!template.dialog || template.dialog.length === 0) {
 			if (template.content) {
-				const morse = MorseCodec.textToMorse(template.content);
-				await this.audio.playMorseString(morse);
+				await this.playTextWordByWord(template.content, this.audio, startWordIndex);
 			}
 			return;
 		}
 
-		//! 各セグメントを交互にA側とB側で再生。
-		for (let i = 0; i < template.dialog.length; i++) {
-			const segment = template.dialog[i];
-			const morse = MorseCodec.textToMorse(segment.text);
+		//! 各セグメントを交互にA側とB側で再生（開始位置から）。
+		for (let i = startSegmentIndex; i < template.dialog.length; i++) {
+			if (!this.state.isPlaying) {
+				if (this.state.isPaused) {
+					this.state.pausedSegmentIndex = i;
+				} else {
+					this.state.currentPlayingSegmentIndex = -1;
+					this.renderAnswer();
+				}
+				return;
+			}
 
-			//! A側またはB側のAudioGeneratorを選択。
+			this.state.currentPlayingSegmentIndex = i;
+			const segment = template.dialog[i];
 			const generator = segment.side === 'A' ? this.audio : this.audioB;
-			await generator.playMorseString(morse);
+			const wordStartIndex = i === startSegmentIndex ? startWordIndex : 0;
+			await this.playTextWordByWord(segment.text, generator, wordStartIndex);
+
+			if (!this.state.isPlaying) {
+				return;
+			}
 
 			//! セグメント間に短い間隔を入れる。
-			if (i < template.dialog.length - 1) {
+			if (i < template.dialog.length - 1 && this.state.isPlaying) {
 				await new Promise(resolve => setTimeout(resolve, 500));
 			}
+		}
+
+		if (!this.state.isPaused) {
+			this.state.currentPlayingSegmentIndex = -1;
+			this.renderAnswer();
 		}
 	}
 
 	private pauseMorse(): void {
 		this.audio.stopPlaying();
+		this.audioB.stopPlaying();
 		this.state.isPlaying = false;
+		this.state.isPaused = true;
 		this.updatePlaybackButtons();
 	}
 
 	private stopMorse(): void {
 		this.audio.stopPlaying();
-		this.state.isPlaying = false;
+		this.audioB.stopPlaying();
+		this.resetPlaybackState();
 		this.state.userInput = '';
 		this.state.showResult = false;
 		this.state.showAnswer = false;
@@ -608,6 +749,7 @@ export class ListeningView implements View {
 	private renderPracticeArea(): void {
 		const practiceInputArea = document.getElementById('practiceInputArea');
 		if (!practiceInputArea) return;
+		const hasDialog = this.state.selectedTemplate?.dialog && this.state.selectedTemplate.dialog.length > 0;
 
 		practiceInputArea.innerHTML = `
 			<div class="input-section">
@@ -618,9 +760,10 @@ export class ListeningView implements View {
 			<div class="action-buttons">
 				<button id="checkBtn" class="btn btn-primary">${t('listening.practice.checkButton')}</button>
 				<button id="showAnswerBtn" class="btn">${this.state.showAnswer ? t('listening.practice.hideAnswer') : t('listening.practice.showAnswer')}</button>
+				${hasDialog ? `<button id="toggleDialogBtn" class="btn ${this.state.showDialogFormat ? 'active' : ''}">${this.state.showDialogFormat ? t('listening.practice.normalView') : t('listening.practice.dialogView')}</button>` : ''}
 			</div>
 
-			${this.state.showAnswer ? '<div id="answerArea"></div>' : ''}
+			${(this.state.showAnswer || this.state.showDialogFormat) ? '<div id="answerArea"></div>' : ''}
 			${this.state.showResult ? '<div id="resultArea"></div>' : ''}
 		`;
 
@@ -640,8 +783,12 @@ export class ListeningView implements View {
 			this.toggleAnswer();
 		});
 
+		document.getElementById('toggleDialogBtn')?.addEventListener('click', () => {
+			this.toggleDialogFormat();
+		});
+
 		//! 正解と結果を描画。
-		if (this.state.showAnswer) {
+		if (this.state.showAnswer || this.state.showDialogFormat) {
 			this.renderAnswer();
 		}
 		if (this.state.showResult) {
@@ -653,28 +800,29 @@ export class ListeningView implements View {
 		const answerArea = document.getElementById('answerArea');
 		if (!answerArea || !this.state.selectedTemplate) return;
 
-		const isQSO = this.state.selectedTemplate.category === 'qso';
+		const hasDialog = this.state.selectedTemplate.dialog && this.state.selectedTemplate.dialog.length > 0;
 		const content = this.getTemplateText(this.state.selectedTemplate);
-
-		//! 対話形式ボタン（QSOの場合のみ表示）。
-		const dialogButton = isQSO
-			? `<button id="toggleDialogBtn" class="btn" style="margin-left: 10px;">${this.state.showDialogFormat ? t('listening.practice.normalView') : t('listening.practice.dialogView')}</button>`
-			: '';
 
 		//! 対話形式表示の生成。
 		let answerContent = '';
-		if (isQSO && this.state.showDialogFormat) {
-			//! BTで区切って話者別に表示。
-			const segments = content.split(/\s+BT\s+/);
+		if (this.state.showDialogFormat && hasDialog) {
 			answerContent = `
 				<table class="dialog-table">
 					<tbody>
-						${segments.map((segment, index) => {
-							const speaker = index % 2 === 0 ? 'A' : 'B';
+						${this.state.selectedTemplate.dialog!.map((segment, segmentIndex) => {
+							const words = segment.text.trim().split(/\s+/).filter(word => word.length > 0);
+							const isCurrentSegment = this.state.currentPlayingSegmentIndex === segmentIndex;
+							const highlightedText = words.map((word, wordIndex) => {
+								if (isCurrentSegment && this.state.currentPlayingWordIndex === wordIndex) {
+									return `<span class="playing-word">${word}</span>`;
+								}
+								return word;
+							}).join(' ');
+
 							return `
-								<tr>
-									<td class="speaker-cell">${speaker}</td>
-									<td class="content-cell">${segment.trim()}</td>
+								<tr class="${isCurrentSegment ? 'playing-segment' : ''}">
+									<td class="speaker-cell">${segment.side}</td>
+									<td class="content-cell">${highlightedText}</td>
 								</tr>
 							`;
 						}).join('')}
@@ -682,21 +830,23 @@ export class ListeningView implements View {
 				</table>
 			`;
 		} else {
-			answerContent = `<div class="answer-text">${content}</div>`;
+			const words = content.trim().split(/\s+/).filter(word => word.length > 0);
+			const highlightedText = words.map((word, wordIndex) => {
+				if (this.state.currentPlayingWordIndex === wordIndex && this.state.isPlaying) {
+					return `<span class="playing-word">${word}</span>`;
+				}
+				return word;
+			}).join(' ');
+
+			answerContent = `<div class="answer-text">${highlightedText}</div>`;
 		}
 
 		answerArea.innerHTML = `
 			<div class="answer-area">
 				<h3 style="display: inline-block;">${t('listening.practice.answerTitle')}</h3>
-				${dialogButton}
 				${answerContent}
 			</div>
 		`;
-
-		//! 対話形式ボタン。
-		document.getElementById('toggleDialogBtn')?.addEventListener('click', () => {
-			this.toggleDialogFormat();
-		});
 	}
 
 	private renderResult(): void {
@@ -709,6 +859,32 @@ export class ListeningView implements View {
 			this.state.userInput
 		);
 
+		const correct = correctText.toUpperCase();
+		const input = this.state.userInput.toUpperCase();
+		const diff = this.getDifference(correct, input);
+
+		let correctHtml = '';
+		let inputHtml = '';
+
+		for (const d of diff) {
+			if (d.type === 'match') {
+				const char = d.correctChar === ' ' ? '&nbsp;' : d.correctChar;
+				correctHtml += char;
+				inputHtml += char;
+			} else if (d.type === 'replace') {
+				const correctChar = d.correctChar === ' ' ? '&nbsp;' : d.correctChar;
+				const inputChar = d.inputChar === ' ' ? '&nbsp;' : d.inputChar;
+				correctHtml += `<span class="diff-error">${correctChar}</span>`;
+				inputHtml += `<span class="diff-error">${inputChar}</span>`;
+			} else if (d.type === 'delete') {
+				const char = d.correctChar === ' ' ? '&nbsp;' : d.correctChar;
+				correctHtml += `<span class="diff-error">${char}</span>`;
+			} else if (d.type === 'insert') {
+				const char = d.inputChar === ' ' ? '&nbsp;' : d.inputChar;
+				inputHtml += `<span class="diff-extra">${char}</span>`;
+			}
+		}
+
 		resultArea.innerHTML = `
 			<div class="result-area">
 				<h3>${t('listening.practice.resultTitle')}</h3>
@@ -716,11 +892,11 @@ export class ListeningView implements View {
 				<div class="comparison">
 					<div class="comparison-row">
 						<strong>${t('listening.practice.correctText')}</strong>
-						<div class="comparison-text">${correctText}</div>
+						<div class="comparison-text">${correctHtml}</div>
 					</div>
 					<div class="comparison-row">
 						<strong>${t('listening.practice.inputText')}</strong>
-						<div class="comparison-text">${this.state.userInput || t('listening.practice.noInput')}</div>
+						<div class="comparison-text">${inputHtml || t('listening.practice.noInput')}</div>
 					</div>
 				</div>
 			</div>
@@ -751,8 +927,11 @@ export class ListeningView implements View {
 			btn.addEventListener('click', () => {
 				const category = btn.getAttribute('data-category') as TemplateCategory | 'custom';
 				if (category) {
+					this.audio.stopPlaying();
+					this.audioB.stopPlaying();
 					this.state.currentCategory = category;
 					this.state.selectedTemplate = null;
+					this.resetPlaybackState();
 					this.state.showResult = false;
 					this.state.showAnswer = false;
 					this.state.showDialogFormat = false;
@@ -770,6 +949,9 @@ export class ListeningView implements View {
 				if (id) {
 					//! ランダムQSO生成ボタンの場合。
 					if (id === 'qso-random-generate') {
+						this.audio.stopPlaying();
+						this.audioB.stopPlaying();
+						this.resetPlaybackState();
 						this.state.selectedTemplate = ListeningTrainer.generateRandomQSO();
 						this.state.showResult = false;
 						this.state.showAnswer = false;
@@ -782,6 +964,9 @@ export class ListeningView implements View {
 						const allTemplates = [...ListeningTrainer.getBuiltinTemplates(), ...this.customTemplates];
 						const template = allTemplates.find(t => t.id === id);
 						if (template) {
+							this.audio.stopPlaying();
+							this.audioB.stopPlaying();
+							this.resetPlaybackState();
 							this.state.selectedTemplate = template;
 							this.state.showResult = false;
 							this.state.showAnswer = false;
@@ -797,12 +982,14 @@ export class ListeningView implements View {
 
 		//! 一覧に戻るボタン。
 		document.getElementById('backToListBtn')?.addEventListener('click', () => {
+			this.audio.stopPlaying();
+			this.audioB.stopPlaying();
+			this.resetPlaybackState();
 			this.state.selectedTemplate = null;
 			this.state.showResult = false;
 			this.state.showAnswer = false;
 			this.state.showDialogFormat = false;
 			this.state.userInput = '';
-			this.audio.stopPlaying();
 			this.render();
 		});
 

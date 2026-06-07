@@ -2557,6 +2557,33 @@ body {
 	word-break: break-all;
 }
 
+.playing-word {
+	background-color: #ffeb3b;
+	font-weight: bold;
+	padding: 2px 4px;
+	border-radius: 3px;
+}
+
+.playing-segment {
+	background-color: rgba(255, 235, 59, 0.1);
+}
+
+.diff-error {
+	color: #f44336;
+	font-weight: bold;
+	background-color: #ffebee;
+	padding: 2px 4px;
+	border-radius: 3px;
+}
+
+.diff-extra {
+	color: #2196f3;
+	font-weight: bold;
+	background-color: #e3f2fd;
+	padding: 2px 4px;
+	border-radius: 3px;
+}
+
 /* 対話形式表示テーブル */
 .dialog-table {
 	width: 100%;
