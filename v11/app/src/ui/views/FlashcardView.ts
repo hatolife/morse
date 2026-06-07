@@ -176,6 +176,13 @@ export class FlashcardView implements View {
 	 */
 	private renderFilterSection(): string {
 		const allTags = FlashcardTrainer.getAllTags(this.allEntries);
+		const frequencyDescriptions: Record<number, string> = {
+			5: '前に指定された最重要語、固定',
+			4: '実 QSO でよく見る語',
+			3: '覚えておくと役立つ一般語・周辺語',
+			2: '低頻度だが場面によっては使う略語',
+			1: '古風、特殊用途、通常 QSO でほぼ出ない、または意味が狭い略語'
+		};
 
 		return `
 			<div class="filter-section">
@@ -197,9 +204,10 @@ export class FlashcardView implements View {
 					<label>使用頻度で絞り込み（1=低頻度、5=高頻度）</label>
 					<div class="frequency-filter" id="frequency-filter">
 						${[5, 4, 3, 2, 1].map(freq => `
-							<label class="frequency-checkbox">
+							<label class="frequency-checkbox" title="★${freq}: ${frequencyDescriptions[freq]}" tabindex="0">
 								<input type="checkbox" value="${freq}" ${this.selectedFrequencies.has(freq) ? 'checked' : ''}>
 								<span>★${freq}</span>
+								<span class="frequency-tooltip">★${freq}: ${frequencyDescriptions[freq]}</span>
 							</label>
 						`).join('')}
 					</div>
