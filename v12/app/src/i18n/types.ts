@@ -172,6 +172,14 @@ export interface Translations {
 			title: string;
 			tagLabel: string;
 			frequencyLabel: string;
+			frequencySummary: string;
+			frequencyCriteria: {
+				'1': string;
+				'2': string;
+				'3': string;
+				'4': string;
+				'5': string;
+			};
 			searchLabel: string;
 			searchPlaceholder: string;
 			filteredCount: string;

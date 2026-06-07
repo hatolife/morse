@@ -159,7 +159,15 @@
 		"filter": {
 			"title": "篩選設定",
 			"tagLabel": "依標籤篩選",
-			"frequencyLabel": "依使用頻率篩選（1=低，5=高）",
+			"frequencyLabel": "依使用頻率篩選",
+			"frequencySummary": "5: 最重要・固定 / 4: 實際QSO常見 / 3: 常用及相關詞 / 2: 低頻・依場景 / 1: 古舊・特殊・狹義",
+			"frequencyCriteria": {
+				"1": "古舊、特殊用途、一般 QSO 中幾乎不出現，或含義較窄的縮寫",
+				"2": "頻率較低，但在特定場景會使用的縮寫",
+				"3": "記住會有幫助的一般詞和相關詞",
+				"4": "實際 QSO 中經常見到的詞",
+				"5": "此前指定的最重要詞，固定優先級"
+			},
 			"searchLabel": "搜尋（縮寫、含義、標籤）",
 			"searchPlaceholder": "e.g., QTH, location, Q code",
 			"filteredCount": "符合:",

@@ -159,7 +159,15 @@
 		"filter": {
 			"title": "Filter Settings",
 			"tagLabel": "Filter by Tag",
-			"frequencyLabel": "Filter by Frequency (1=Low, 5=High)",
+			"frequencyLabel": "Filter by Frequency",
+			"frequencySummary": "5: Essential/fixed / 4: Common in real QSOs / 3: Useful general terms / 2: Low-frequency/contextual / 1: Old, special, or narrow",
+			"frequencyCriteria": {
+				"1": "Old-fashioned, special-purpose, rarely seen in normal QSOs, or narrow in meaning",
+				"2": "Low-frequency abbreviation used in specific situations",
+				"3": "Useful general or related term worth knowing",
+				"4": "Often seen in real QSOs",
+				"5": "Previously designated essential term, fixed priority"
+			},
 			"searchLabel": "Search (abbreviation, meaning, tags)",
 			"searchPlaceholder": "e.g., QTH, location, Q code",
 			"filteredCount": "Filtered:",

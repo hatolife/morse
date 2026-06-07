@@ -627,6 +627,13 @@ body {
 	color: var(--text-color);
 }
 
+.frequency-summary {
+	margin: -4px 0 10px;
+	color: var(--text-light);
+	font-size: 0.9rem;
+	line-height: 1.5;
+}
+
 .tag-filter,
 .frequency-filter {
 	display: flex;
@@ -639,6 +646,7 @@ body {
 	display: inline-flex;
 	align-items: center;
 	gap: 5px;
+	position: relative;
 	padding: 8px 12px;
 	background-color: #f8f9fa;
 	border: 1px solid var(--border-color);
@@ -652,8 +660,52 @@ body {
 	background-color: #e9ecef;
 }
 
+.frequency-checkbox:focus,
+.frequency-checkbox:focus-within {
+	outline: 2px solid var(--primary-color);
+	outline-offset: 2px;
+}
+
+.frequency-tooltip {
+	position: absolute;
+	left: 50%;
+	bottom: calc(100% + 8px);
+	z-index: 20;
+	width: max-content;
+	max-width: min(320px, calc(100vw - 32px));
+	padding: 8px 10px;
+	border-radius: 4px;
+	background: #222;
+	color: white;
+	font-size: 0.85rem;
+	font-weight: normal;
+	line-height: 1.4;
+	white-space: normal;
+	box-shadow: var(--shadow);
+	opacity: 0;
+	pointer-events: none;
+	transform: translate(-50%, 4px);
+	transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.frequency-tooltip::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	top: 100%;
+	border: 6px solid transparent;
+	border-top-color: #222;
+	transform: translateX(-50%);
+}
+
+.frequency-checkbox:hover .frequency-tooltip,
+.frequency-checkbox:focus-within .frequency-tooltip {
+	opacity: 1;
+	transform: translate(-50%, 0);
+}
+
 .tag-checkbox input:checked ~ span,
-.frequency-checkbox input:checked ~ span {
+.frequency-checkbox input:checked ~ span:not(.frequency-tooltip) {
 	font-weight: bold;
 	color: var(--secondary-color);
 }

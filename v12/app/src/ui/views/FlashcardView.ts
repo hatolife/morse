@@ -190,6 +190,13 @@ export class FlashcardView implements View {
 	 */
 	private renderFilterSection(): string {
 		const allTags = FlashcardTrainer.getAllTags(this.allEntries);
+		const frequencyCriteria = {
+			1: t('flashcard.filter.frequencyCriteria.1'),
+			2: t('flashcard.filter.frequencyCriteria.2'),
+			3: t('flashcard.filter.frequencyCriteria.3'),
+			4: t('flashcard.filter.frequencyCriteria.4'),
+			5: t('flashcard.filter.frequencyCriteria.5')
+		};
 
 		return `
 			<div class="filter-section">
@@ -209,11 +216,13 @@ export class FlashcardView implements View {
 
 				<div class="filter-group">
 					<label>${t('flashcard.filter.frequencyLabel')}</label>
+					<p class="frequency-summary">${t('flashcard.filter.frequencySummary')}</p>
 					<div class="frequency-filter" id="frequency-filter">
 						${[5, 4, 3, 2, 1].map(freq => `
-							<label class="frequency-checkbox">
+							<label class="frequency-checkbox" title="★${freq}: ${frequencyCriteria[freq as keyof typeof frequencyCriteria]}" tabindex="0">
 								<input type="checkbox" value="${freq}" ${this.selectedFrequencies.has(freq) ? 'checked' : ''}>
 								<span>★${freq}</span>
+								<span class="frequency-tooltip" role="tooltip">★${freq}: ${frequencyCriteria[freq as keyof typeof frequencyCriteria]}</span>
 							</label>
 						`).join('')}
 					</div>

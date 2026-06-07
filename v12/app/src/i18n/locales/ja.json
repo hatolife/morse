@@ -159,7 +159,15 @@
 		"filter": {
 			"title": "フィルター設定",
 			"tagLabel": "タグで絞り込み",
-			"frequencyLabel": "使用頻度で絞り込み（1=低頻度、5=高頻度）",
+			"frequencyLabel": "使用頻度で絞り込み",
+			"frequencySummary": "5: 最重要・固定 / 4: 実QSO頻出 / 3: 一般語・周辺語 / 2: 低頻度・場面依存 / 1: 古風・特殊・狭義",
+			"frequencyCriteria": {
+				"1": "古風、特殊用途、通常 QSO でほぼ出ない、または意味が狭い略語",
+				"2": "低頻度だが場面によっては使う略語",
+				"3": "覚えておくと役立つ一般語・周辺語",
+				"4": "実 QSO でよく見る語",
+				"5": "前に指定された最重要語、固定"
+			},
 			"searchLabel": "検索（略語・意味・タグ）",
 			"searchPlaceholder": "例: QTH, location, Q符号",
 			"filteredCount": "該当:",

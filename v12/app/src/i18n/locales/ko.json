@@ -159,7 +159,15 @@
 		"filter": {
 			"title": "필터 설정",
 			"tagLabel": "태그로 필터링",
-			"frequencyLabel": "사용 빈도로 필터링 (1=낮음, 5=높음)",
+			"frequencyLabel": "사용 빈도로 필터링",
+			"frequencySummary": "5: 최중요・고정 / 4: 실제 QSO 빈출 / 3: 일반어・관련어 / 2: 저빈도・상황 의존 / 1: 고어・특수・협의",
+			"frequencyCriteria": {
+				"1": "오래되었거나 특수 용도이며 일반 QSO에서는 거의 나오지 않거나 의미가 좁은 약어",
+				"2": "빈도는 낮지만 상황에 따라 쓰이는 약어",
+				"3": "알아두면 도움이 되는 일반어 및 관련어",
+				"4": "실제 QSO에서 자주 보이는 말",
+				"5": "이전에 지정한 최중요 용어, 고정 우선순위"
+			},
 			"searchLabel": "검색(약어, 의미, 태그)",
 			"searchPlaceholder": "e.g., QTH, location, Q code",
 			"filteredCount": "해당:",
