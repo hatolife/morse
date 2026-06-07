@@ -11,7 +11,7 @@
 送受,制御,プロサイン	5	[VA]	End of work	通信終了/さようなら	通信の終了を示すプロサイン。	最終送信で「73 VA」と送り終了を示す。
 送受,制御,プロサイン	4	[SK]	End of contact	交信終了	交信の完全な終了を示すプロサイン。	「TU 73 SK」で交信を終了する。
 送受,制御,プロサイン	3	[CL]	Closing station	閉局します	運用を終了して局を閉じることを示すプロサイン。	最後に「73 SK CL」で閉局を伝える。
-送受,制御,プロサイン	2	[CT]	Start of transmission	送信開始またはテスト信号	送信開始時にCTを送りテストや本開始を示す。	テスト送信「CT CT」で確認。
+送受,制御,プロサイン	1	[CT]	Start of transmission	送信開始またはテスト信号	送信開始時にCTを送りテストや本開始を示す。	テスト送信「CT CT」で確認。
 送受,制御,プロサイン	3	[AA]	All after	以降すべて	メッセージの指定点以降の繰り返しを依頼。	? AA で以降の部分を再送依頼。
 送受,制御,プロサイン	3	[AB]	All before	以前すべて	メッセージの指定点以前の繰り返しを依頼。	? AB で以前の部分を再送依頼。
 送受,制御,プロサイン	4	[BN]	All between	間すべて	メッセージの2点間の繰り返しを依頼。	BN AA AB で間の部分を再送。
@@ -85,7 +85,7 @@
 挨拶,定型表現	4	GB	Goodbye	さようなら	別れの挨拶。	「GB SK」でさようなら。
 挨拶,定型表現	4	73	Best regards	よろしく/さようなら	交信の締めで使う定番の挨拶。単数形として扱う。	交信終了時に「TNX QSO 73」と送る。
 挨拶,定型表現	4	88	Love and kisses	愛を込めて	親しい相手に使う愛情表現。通常の交信では相手や文脈を選ぶ。	親しい相手への締めに「73 88」と送る。
-挨拶,定型表現	2	99	Best wishes	成功を祈る(主にコンテスト)	コンテストの励まし。	「99 GL」で幸運祈る。
+挨拶,定型表現	1	99	Best wishes	成功を祈る(主にコンテスト)	コンテストの励まし。	「99 GL」で幸運祈る。
 挨拶,定型表現,プロサイン	5	[VVV]	General call or test call	一般呼び出し、またはテスト送信	テストや一般呼び。	「VVV VVV DE JA1ABC」で確認。
 挨拶,定型表現	4	HI	Laugh (like "haha")	(笑)	笑いの表現。	ジョーク後「HI HI」で笑う。
 設備,用語	5	HR	Here; Hear	ここ/聞こえる	場所や受信を表す略語。	「HR QTH TOKYO」でこちらの場所を伝える。
@@ -115,47 +115,47 @@
 設備,用語	4	ABT	About	約	およそ。	「ABT 20M」で20m帯約。
 設備,用語	2	ADR	Address	住所	住所詳細。	QSL用「ADR TOKYO」で住所。
 設備,用語	2	ADS	Address	住所	住所略。	「ADS JP3XXX」でコール住所。
-設備,用語	2	AF	Africa	アフリカ	大陸指定。	「AF DX」でアフリカ。
-設備,用語	2	ANI	Any	任意	任意。	「ANI FREQ」で任意周波数。
+設備,用語	1	AF	Africa	アフリカ	大陸指定。	「AF DX」でアフリカ。
+設備,用語	1	ANI	Any	任意	任意。	「ANI FREQ」で任意周波数。
 設備,用語	3	ANS	Answer	回答	返答。	質問に「ANS C」でYes。
 設備,用語	4	B4	Before	以前	以前。	「B4 QSO」で前交信。
 設備,用語	3	BCI	Broadcast Interference	放送干渉	放送干渉。	「BCI TV」でTV妨害。
 設備,用語	2	BCK	Back	戻る	戻る。	トピック「BCK QTH」で位置に戻る。
-設備,用語	2	BCL	Broadcast Listener	放送聴取者	放送リスナー。	「BCL QRM」で干渉注意。
+設備,用語	1	BCL	Broadcast Listener	放送聴取者	放送リスナー。	「BCL QRM」で干渉注意。
 設備,用語	3	BCNU	Be seeing you	また会いましょう	別れ。	「BCNU SK」でまた。
-設備,用語	2	BCSE	Because	なぜなら	理由。	「BCSE QRN」でノイズのため。
+設備,用語	1	BCSE	Because	なぜなら	理由。	「BCSE QRN」でノイズのため。
 設備,用語	2	BD	Bad	悪い	悪い。	「BD COPY」で聞き取り悪い。
 設備,用語	2	BN	Been	であった	過去。	「BN QSO」であった。
-設備,用語	2	BTH	Both	両方	両方。	「BTH OK」で両方可。
+設備,用語	1	BTH	Both	両方	両方。	「BTH OK」で両方可。
 設備,用語	2	BTR	Better	より良い	より良い。	「BTR RST」でレポート改善。
 設備,用語	2	BTU	Back to you	お返事	返事。	「BTU OM」でお返事。
 設備,用語	3	BTW	By the way	ところで	ちなみに。	「BTW WX」で天気ついでに。
-設備,用語	2	BUG	Semi-Automatic Key	バグキー	半自動キー。	「BUG KEY」でキー種類。
+設備,用語	1	BUG	Semi-Automatic Key	バグキー	半自動キー。	「BUG KEY」でキー種類。
 設備,用語	3	BURO	Bureau	ビューロー	QSL局。	「BURO QSL」で局経由。
 設備,用語	3	CBA	Call book address	コールブック住所	コールブック住所。	「CBA JP3XXX」で住所確認。
 設備,用語	3	CK	Check	確認	確認。	「CK SIG」で信号確認。
-設備,用語	2	CKT	Circuit	回路	回路。	「CKT ANT」でアンテナ回路。
-設備,用語	2	CLD	Called	呼ばれた	呼ばれた。	「CLD CQ」で呼ばれた。
+設備,用語	1	CKT	Circuit	回路	回路。	「CKT ANT」でアンテナ回路。
+設備,用語	1	CLD	Called	呼ばれた	呼ばれた。	「CLD CQ」で呼ばれた。
 設備,用語	4	CLG	Calling	呼んでいる	呼んでいる。	「CLG DX」でDX呼び。
 設備,用語	3	CLR	Clear	明瞭	明瞭。	「CLR COPY」でクリア受信。
-設備,用語	2	CMG	Coming	来る	来る。	「CMG SKED」でスケジュール来る。
+設備,用語	1	CMG	Coming	来る	来る。	「CMG SKED」でスケジュール来る。
 設備,用語	2	CNT	Can't or Cannot	できない	できない。	「CNT HRD」で聞こえない。
 設備,用語	3	CONDX	Condition	状態	条件。	「CONDX POOR」で条件悪い。
-設備,用語	2	CP	CP	特定の呼び出し	特定の呼び。	「CP JA1ABC」でコール。
+設備,用語	1	CP	CP	特定の呼び出し	特定の呼び。	「CP JA1ABC」でコール。
 設備,用語	4	CPI	Copy	受信/コピー	CPYと同様に受信できたことを表す略語。	「CPI OK」で問題なく受信できたことを伝える。
 確認,返答	4	CPY	Copy	受信/コピー	相手の信号や内容を受信できたこと、または受信状態を表す略語。	「HW CPY?」で受信できているか尋ねる。
 設備,用語	2	CRD	Card	カード	カード。	「CRD QSL」でカード。
-設備,用語	2	CSE	Because	なぜなら	理由。	「CSE QRM」で干渉のため。
+設備,用語	1	CSE	Because	なぜなら	理由。	「CSE QRM」で干渉のため。
 設備,用語	2	CUD	Could	?できますか？	可能性を尋ねる丁寧表現。	「CUD U MOVE UP 3 ?」で「3kHz上がってもらえませんか？」。
 設備,用語	4	CUL	See you later	また後で	また後で。	「CUL 73」で後で。
-設備,用語	2	CUZ	Because	なぜなら	理由。	「CUZ QRN」でノイズで。
+設備,用語	1	CUZ	Because	なぜなら	理由。	「CUZ QRN」でノイズで。
 設備,用語	4	CW	Continuous Wave	連続波	連続波。	「CW ONLY」でCW運用。
-設備,用語	2	DO	DO	ホレ	ここ。	「DO QTH」でここ位置。
+設備,用語	1	DO	DO	ホレ	ここ。	「DO QTH」でここ位置。
 設備,用語	2	DP	Dipole	ダイポール	ダイポール。	「DP ANT」でアンテナ。
-設備,用語	2	DSW	Goodby	さようなら	さようなら。	「DSW GB」で別れ。
+設備,用語	1	DSW	Goodby	さようなら	さようなら。	「DSW GB」で別れ。
 設備,用語	4	ES	and	そして/および	英語のandに相当するCW略語。	「73 ES TU」で「よろしく、そしてありがとう」と伝える。
 設備,用語	2	EU	Europe	ヨーロッパ	ヨーロッパ。	「EU DX」で欧州。
-設備,用語	2	EYE	I	I	私。	「EYE OM」で私は男性。
+設備,用語	1	EYE	I	I	私。	「EYE OM」で私は男性。
 設備,用語	5	EX	From; former	元/以前の	以前や元を表す略語。	「EX CALL」で以前のコールサインを示す。
 設備,用語	5	EXZ	Except	除く	例外や除外を表す略語。	「ALL EXZ QRM」で混信を除く全てを示す。
 設備,用語	4	FB	Fine business	素晴らしい/了解良好	よい状態や満足を表す定番CW略語。	「FB SIG」で信号が良好であることを伝える。
@@ -164,43 +164,43 @@
 設備,用語	2	FRM	From	から	から。	「FRM QTH」で位置から。
 設備,用語	2	FREQ	Frequency	周波数	周波数。	「FREQ 14000」で指定。
 設備,用語	4	GD	Good or Good Day	良い一日を	良い日。	「GD MORN」でおはよう。
-設備,用語	2	GESS	Guess	推測	推測。	「GESS RST 599」で推測。
-設備,用語	2	GG	Going	行く	行く。	「GG QRT」で終了行く。
+設備,用語	1	GESS	Guess	推測	推測。	「GESS RST 599」で推測。
+設備,用語	1	GG	Going	行く	行く。	「GG QRT」で終了行く。
 設備,用語	2	GLD	Glad	嬉しい	嬉しい。	「GLD QSO」で交信嬉しい。
 設備,用語	3	GND	Ground	グラウンド	グラウンド。	「GND CON」でグラウンド接続。
 設備,用語	3	GP	Ground Plane	グランドプレーン	グランドプレーン。	「GP ANT」でアンテナ。
 設備,用語	2	GS	Green Stamp	ドル札	ドル。	SASE「GS PSE」で切手。
 設備,用語	4	GUD	Good	良い	goodを短く送るためのCW略語。	「GUD CPY」で良好に受信できていることを伝える。
-設備,用語	2	GV	Give	与える	与える。	「GV RST」でレポート与える。
-設備,用語	2	GVG	Giving	与えている	与えている。	「GVG INFO」で情報与え。
+設備,用語	1	GV	Give	与える	与える。	「GV RST」でレポート与える。
+設備,用語	1	GVG	Giving	与えている	与えている。	「GVG INFO」で情報与え。
 設備,用語	4	HNY	A Happy New Year	明けましておめでとう	新年。	「HNY 73」でおめでとう。
 設備,用語	4	HPE	Hope	希望	希望。	「HPE QSL」でカード希望。
-設備,用語	2	HQ	Headquarters	本部	本部。	「HQ JARL」で本部。
+設備,用語	1	HQ	Headquarters	本部	本部。	「HQ JARL」で本部。
 設備,用語	3	HRD	Heard	聞いた	聞いた。	「HRD U」であなた聞いた。
-設備,用語	2	HRS	Hours	時間	時間。	「HRS 2」で2時間。
+設備,用語	1	HRS	Hours	時間	時間。	「HRS 2」で2時間。
 設備,用語	4	HV	Have	持つ	持つ。	「HV QSL」でカード持つ。
-設備,用語	2	HVG	Having	持っている	持っている。	「HVG ANT」でアンテナ持つ。
+設備,用語	1	HVG	Having	持っている	持っている。	「HVG ANT」でアンテナ持つ。
 設備,用語	2	HVY	Heavy	重い	重い。	「HVY QRM」で干渉重い。
 設備,用語	4	HW	How / How copy?	いかがですか？/受信状態は？	howの略。特に「HW CPY?」で受信状態を尋ねる。	「HW CPY?」でこちらの信号がどう聞こえるか尋ねる。
 設備,用語	2	INFO	Information	情報	情報。	「INFO DX」でDX情報。
-設備,用語	2	KLIX	Key Clicks	キークリック	キークリック。	「KLIX SORRY」でクリック謝罪。
+設備,用語	1	KLIX	Key Clicks	キークリック	キークリック。	「KLIX SORRY」でクリック謝罪。
 設備,用語	4	LID	A poor operator	下手なオペレーター	下手オペ。	「LID HI」で自嘲。
-設備,用語	2	LIL	Little	小さい	小さい。	「LIL PWR」で低出力。
+設備,用語	1	LIL	Little	小さい	小さい。	「LIL PWR」で低出力。
 設備,用語	2	LNG	Long	長い	長い。	「LNG PATH」で長経路。
 設備,用語	3	LP	Long Path	長経路	長経路。	「LP DX」で長経路。
 設備,用語	3	LSN	Listen	聞く	聞く。	「LSN PSE」で聞いて。
-設備,用語	2	LTL	Little	小さい	小さい。	「LTL ANT」で小型アンテナ。
+設備,用語	1	LTL	Little	小さい	小さい。	「LTL ANT」で小型アンテナ。
 設備,用語	2	LTR	Letter or Later	手紙または後で	手紙後で。	「LTR BURO」で手紙局経由。
-設備,用語	2	LV	Leave	去る	去る。	「LV QRT」で去る終了。
-設備,用語	2	LVG	Leaving	去っている	去っている。	「LVG SOON」ですぐ去る。
+設備,用語	1	LV	Leave	去る	去る。	「LV QRT」で去る終了。
+設備,用語	1	LVG	Leaving	去っている	去っている。	「LVG SOON」ですぐ去る。
 設備,用語	3	LW	Long Wire or Long Wave	ロングワイヤー	ロングワイヤー。	「LW ANT」でアンテナ。
-設備,用語	2	MA	Milliampers	ミリアンペア	ミリアンペア。	「MA 100」で電流。
+設備,用語	1	MA	Milliampers	ミリアンペア	ミリアンペア。	「MA 100」で電流。
 設備,用語	3	MGR	Manager	マネージャー	マネージャー。	「MGR CLUB」でクラブマネージャー。
-設備,用語	2	MI	My	私の	私の。	「MI QTH」で私の位置。
-設備,用語	2	MICRO	micro computer	マイクロコンピューター	マイコン。	「MICRO LOG」でログ用。
-設備,用語	2	MM	Maritime mobile	海上移動	海上移動。	「MM /SHIP」で船上。
+設備,用語	1	MI	My	私の	私の。	「MI QTH」で私の位置。
+設備,用語	1	MICRO	micro computer	マイクロコンピューター	マイコン。	「MICRO LOG」でログ用。
+設備,用語	1	MM	Maritime mobile	海上移動	海上移動。	「MM /SHIP」で船上。
 設備,用語	3	MNI	many	多い	多い。	「MNI TNX」で多数感謝。
-設備,用語	2	MOM	Moment	瞬間	瞬間。	「MOM PSE」で少し待って。
+設備,用語	1	MOM	Moment	瞬間	瞬間。	「MOM PSE」で少し待って。
 設備,用語	3	MSG	Message	メッセージ	メッセージ。	「MSG QTC」でメッセージ。
 設備,用語	2	MTRS	meters	メートル	メートル。	「MTRS 20」で20m。
 設備,用語	2	MULT	Multiplier	マルチプライヤー	マルチプライヤー。	コンテスト「MULT 50」で50。
@@ -208,79 +208,79 @@
 確認,返答	4	YES	Yes	はい	肯定を表す略語。	質問への返答に「YES」で肯定する。
 設備,用語	2	NA	North America	北米	北米。	「NA DX」で北米。
 設備,用語	2	NCS	Net Control Station	ネットコントロール	ネットコントロール。	「NCS CQ」でネット開始。
-設備,用語	2	ND	Nothing Doing	だめ	だめ。	「ND QSY」で変更不可。
+設備,用語	1	ND	Nothing Doing	だめ	だめ。	「ND QSY」で変更不可。
 設備,用語	4	NR	Number, Near	番号または近く	番号近く。	「NR 10」で10番。
 設備,用語	2	NITE	Night	夜	夜。	「NITE GN」で夜おやすみ。
-設備,用語	2	OC	Old Chum/Chap or Oceania	古い友人またはオセアニア	古い友人オセアニア。	「OC OM」で古友。
+設備,用語	1	OC	Old Chum/Chap or Oceania	古い友人またはオセアニア	古い友人オセアニア。	「OC OM」で古友。
 設備,用語	5	OK	Correct	正しい	正しい。	「OK RST」でOK。
 設備,用語	2	OT	Old timer, Old Top	古株	古株。	「OT HI」でベテラン。
-設備,用語	2	OW	Old Woman	老婦人	老婦人。	「OW XYL」で妻。
-設備,用語	2	PSED	Pleased	喜ぶ	喜ぶ。	「PSED QSO」で喜ぶ。
+設備,用語	1	OW	Old Woman	老婦人	老婦人。	「OW XYL」で妻。
+設備,用語	1	PSED	Pleased	喜ぶ	喜ぶ。	「PSED QSO」で喜ぶ。
 設備,用語	4	PWR	Power	電力	電力。	「PWR 100W」で出力。
 設備,用語	3	RC	Ragchew	雑談	雑談。	「RC RAG」で雑談。
 設備,用語	4	RCVD	Received	受信	受信。	「RCVD ALL」で全受信。
 設備,用語	4	RCD	Received	受信	受信。	「RCD QSL」で受信。
 設備,用語	4	RCVR	Receiver	受信機	受信機。	「RCVR FT-817」で機種。
 設備,用語	3	REPT	Report	レポート	レポート。	「REPT RST」でレポート。
-設備,用語	2	RNG	Running	走行中	走行中。	移動「RNG MOBILE」で走行。
+設備,用語	1	RNG	Running	走行中	走行中。	移動「RNG MOBILE」で走行。
 設備,用語	3	RTTY	Radio Teletype	ラジオテレタイプ	ラジオテレタイプ。	「RTTY MODE」でモード。
 設備,用語	4	RX	Receiver	受信機	受信機。	「RX NOW」で受信待機。
-設備,用語	2	SA	Say	Sayまたは南米	言う南米。	「SA QTH」で言う位置。
+設備,用語	1	SA	Say	Sayまたは南米	言う南米。	「SA QTH」で言う位置。
 設備,用語	2	SASE	Self Addressed and Stamped Envelope	返信用封筒	返信用封筒。	「SASE PSE」で依頼。
 設備,用語	2	SED	Said	言った	言った。	「SED QRA」で言った名前。
-設備,用語	2	SHUD	Should	すべき	すべき。	「SHUD QSY」で変更すべき。
+設備,用語	1	SHUD	Should	すべき	すべき。	「SHUD QSY」で変更すべき。
 設備,用語	4	SIG	Signal(s)	信号	信号。	「SIG 599」で信号。
 設備,用語	4	SKED	Schedule	スケジュール	スケジュール。	「SKED 1400Z」で約束。
 設備,用語	2	SND	Sound	音	音。	「SND GOOD」で音良い。
 設備,用語	3	SP	Short Path	短経路	短経路。	「SP DX」で短経路。
 設備,用語	4	SRI	Sorry	すみません/ごめんなさい	sorryを短く送るための定番CW略語。	「SRI QRM」で混信について謝る。
-設備,用語	2	SS	Sweepstakes	スイープステークス	スイープステークス。	「SS CONTEST」でコンテスト。
+設備,用語	1	SS	Sweepstakes	スイープステークス	スイープステークス。	「SS CONTEST」でコンテスト。
 設備,用語	2	STEDI	Steady	安定	安定。	「STEDI SIG」で安定信号。
 設備,用語	3	STN	Station	局	局。	「STN JA1ABC」で局。
 設備,用語	2	SU	See You	また会おう	また会おう。	「SU CUL」でまた。
-設備,用語	2	SUM	Some	いくつか	いくつか。	「SUM QTC」でいくつか。
+設備,用語	1	SUM	Some	いくつか	いくつか。	「SUM QTC」でいくつか。
 設備,用語	2	SVC	Service	サービス	サービス。	「SVC NET」でサービス。
 設備,用語	3	SWL	Short Wave Listener	短波リスナー	短波リスナー。	「SWL HRD」でリスナー。
-設備,用語	2	T	Zero	ゼロ	ゼロ。	「T RST」で0レポート。
+設備,用語	1	T	Zero	ゼロ	ゼロ。	「T RST」で0レポート。
 設備,用語	4	TEMP	Temperature	温度	温度。	「TEMP 20C」で温度。
 設備,用語	3	TFC	Traffic	トラフィック	トラフィック。	「TFC 5」で5通。
 設備,用語	2	TRBL	Trouble	トラブル	トラブル。	「TRBL ANT」でアンテナ問題。
-設備,用語	2	TRE	There	そこ	そこ。	「TRE QTH」でそこ位置。
-設備,用語	2	TRIX	Tricks	トリック	トリック。	「TRIX HI」でトリック笑い。
+設備,用語	1	TRE	There	そこ	そこ。	「TRE QTH」でそこ位置。
+設備,用語	1	TRIX	Tricks	トリック	トリック。	「TRIX HI」でトリック笑い。
 設備,用語	3	TRX	Transceiver	トランシーバー	トランシーバー。	「TRX IC-7610」で機種。
-設備,用語	2	TT	That	それ	それ。	「TT QSL」でそれ確認。
-設備,用語	2	TTS	That is	つまり	つまり。	「TTS DX」でつまりDX。
+設備,用語	1	TT	That	それ	それ。	「TT QSL」でそれ確認。
+設備,用語	1	TTS	That is	つまり	つまり。	「TTS DX」でつまりDX。
 設備,用語	2	TVI	Television Interference	テレビ干渉	テレビ干渉。	「TVI BAD」でTV妨害。
 設備,用語	4	TX	Transmitter	送信機	送信機。	「TX NOW」で送信開始。
-設備,用語	2	TXT	Text	テキスト	テキスト。	「TXT MSG」でテキスト。
+設備,用語	1	TXT	Text	テキスト	テキスト。	「TXT MSG」でテキスト。
 設備,用語	4	U	You	あなた	あなた。	「U OM」であなた男性。
 設備,用語	4	UFB	Ultra Fine Business	大変素晴らしい	大変素晴らしい。	「UFB QSO」で素晴らしい交信。
-設備,用語	2	URS	Yours	あなたの	あなたの。	「URS QTH」であなたの位置。
+設備,用語	1	URS	Yours	あなたの	あなたの。	「URS QTH」であなたの位置。
 設備,用語	3	VERT	Vertical Antenna	垂直アンテナ	垂直アンテナ。	「VERT GP」で垂直。
 設備,用語	3	VFB	Very Fine Business	とても素晴らしい	とても素晴らしい。	「VFB SIG」でとても良い。
 設備,用語	3	VFO	V.F.O.	可変周波発振器	可変周波発振器。	「VFO A」でVFO選択。
 設備,用語	4	WKD	Worked	交信した	交信した。	「WKD JA1ABC」で交信済み。
 設備,用語	4	WKG	Working	交信中	交信中。	「WKG DX」でDX中。
-設備,用語	2	WID	With	と一緒に	と一緒に。	「WID OM」で一緒に。
-設備,用語	2	WL	Will 、 Well	する、では	するでは。	「WL TRY」でするよ。
+設備,用語	1	WID	With	と一緒に	と一緒に。	「WID OM」で一緒に。
+設備,用語	1	WL	Will 、 Well	する、では	するでは。	「WL TRY」でするよ。
 設備,用語	3	WPM	Words Per Minute	毎分語数	毎分語数。	「WPM 20」で速度。
 設備,用語	2	WRK	Work	仕事	仕事。	「WRK QSL」でQSL仕事。
-設備,用語	2	WTS	watts	ワット	ワット。	「WTS 100」で100W。
-設備,用語	2	WUD	Would	するだろう	するだろう。	「WUD QSY」で変更するよ。
+設備,用語	1	WTS	watts	ワット	ワット。	「WTS 100」で100W。
+設備,用語	1	WUD	Would	するだろう	するだろう。	「WUD QSY」で変更するよ。
 設備,用語	2	WW	World Wide	世界規模	世界規模。	「WW CQ」で世界呼び。
 設備,用語	3	XCVR	Transceiver	トランシーバー	トランシーバー。	「XCVR FTDX」で機種。
 設備,用語	3	XMAS	Christmas	クリスマス	クリスマス。	「XMAS HNY」でクリスマス。
 設備,用語	4	XMTR	Transmitter	送信機	送信機。	「XMTR PWR」で送信機電力。
 設備,用語	4	XTAL	Crystal	水晶	水晶。	「XTAL FREQ」で水晶周波数。
-設備,用語	2	YF	Wife	妻	妻。	「YF XYL」で妻。
+設備,用語	1	YF	Wife	妻	妻。	「YF XYL」で妻。
 設備,用語	2	YTD	Yesterday	昨日	昨日。	「YTD QSO」で昨日交信。
 設備,用語	3	Z	Zulu	世界標準時	世界標準時。	「Z 0000」でUTC。
 挨拶,定型表現	3	30	I have no more to send	これ以上なし	メッセージなし終了。	「30 AR」で終了。
-挨拶,定型表現	2	33	Fondest Regards	親愛の挨拶	親愛の挨拶。	「33 73」で親愛。
-挨拶,定型表現	2	44	Flora and Fauna	動植物	動植物。	「44 WX」で天気動植物。
-挨拶,定型表現	2	55	Best Success	成功を祈る	成功祈る。	「55 GL」で成功。
+挨拶,定型表現	1	33	Fondest Regards	親愛の挨拶	親愛の挨拶。	「33 73」で親愛。
+挨拶,定型表現	1	44	Flora and Fauna	動植物	動植物。	「44 WX」で天気動植物。
+挨拶,定型表現	1	55	Best Success	成功を祈る	成功祈る。	「55 GL」で成功。
 挨拶,定型表現	2	72	Best Regards	よろしく(QRP用)	QRP用よろしく。	「72 QRP」で低出力礼。
-挨拶,定型表現	2	161	Best regards to you and your XYL	家族によろしく	家族によろしく。	「161 XYL」で妻に。
+挨拶,定型表現	1	161	Best regards to you and your XYL	家族によろしく	家族によろしく。	「161 XYL」で妻に。
 挨拶,定型表現,プロサイン	3	[?]	Question Mark / I repeat	疑問/繰り返し	疑問や繰り返し。	「? AGN」で繰り返し。
 RST	4	RST	Readability, Strength, Tone	了解度・信号強度・音調のレポート	CWで信号品質を3桁で表す標準的なレポート形式。	「UR RST 579」で了解度5、強度7、音調9を伝える。
 RST	4	RST 599	Readability 5, Strength 9, Tone 9	了解度5・強度9・音調9	非常に良好なCW信号を表す代表的なRSTレポート。	「UR RST 599」で完全に読めて強力かつ良好な音調と伝える。
@@ -298,7 +298,7 @@ RST,詳細	3	T1	Extremely rough, very harsh note	極めて粗く耳障り	粗悪
 RST,詳細	4	T5	Fairly pure tone	かなり純粋な音	やや純音。	まあまあ「T5」で良い。
 RST,詳細	4	T9	Extremely pure tone, crystal clear	非常に純粋で澄んだ音	澄んだ音。	完璧「T9」でクリア。
 メッセージ処理	3	ADEE	Addressee	宛先	メッセージの受信者。	正式メッセージで「ADEE JA1ABC」。
-メッセージ処理	2	DLD	Delivered	配達済み	メッセージの配信確認。	「DLD OK」で配信完了。
+メッセージ処理	1	DLD	Delivered	配達済み	メッセージの配信確認。	「DLD OK」で配信完了。
 メッセージ処理	3	NM	No more	以上なし	送信終了の意味。	「NM to send」でこれ以上なし。
 干渉関連	3	BCI	Broadcast interference	放送干渉	放送局からの干渉。	「BCI on TV」でTV干渉報告。
 干渉関連	3	RFI	Radio frequency interference	無線周波干渉	RF源からの干渉。	「RFI bad PSE QSY」で周波変更依頼。
