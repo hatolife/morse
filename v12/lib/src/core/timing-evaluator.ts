@@ -107,7 +107,7 @@ export class TimingEvaluator {
 	 * ```ts
 	 * const timings = TimingCalculator.calculate(20);
 	 * const record = TimingEvaluator.createRecord('.', 58, timings);
-	 * console.log(record.expectedDuration); // 60ms (20 WPMの場合)
+	 * console.log(record.expectedDuration); // 60ms at 20 WPM
 	 * ```
 	 */
 	static createRecord(
@@ -169,7 +169,7 @@ export class TimingEvaluator {
 	 * ];
 	 * const evaluations = records.map(r => TimingEvaluator.evaluate(r));
 	 * const stats = TimingEvaluator.calculateStatistics(evaluations);
-	 * console.log(stats.averageAccuracy); // 平均精度
+	 * console.log(stats.averageAccuracy); // Average accuracy
 	 * ```
 	 */
 	static calculateStatistics(evaluations: TimingEvaluation[]): TimingStatistics {
@@ -225,8 +225,8 @@ export class TimingEvaluator {
 	 * ```ts
 	 * const evaluations = [...]; // TimingEvaluation[]
 	 * const classified = TimingEvaluator.classifyByElement(evaluations);
-	 * console.log(classified.dot.length); // dot入力の数
-	 * console.log(classified.dash.length); // dash入力の数
+	 * console.log(classified.dot.length); // Number of dot inputs
+	 * console.log(classified.dash.length); // Number of dash inputs
 	 * ```
 	 */
 	static classifyByElement(evaluations: TimingEvaluation[]): {
@@ -249,7 +249,7 @@ export class TimingEvaluator {
 	 * ```ts
 	 * const evaluations = [...]; // TimingEvaluation[]
 	 * const recent = TimingEvaluator.getRecent(evaluations, 10);
-	 * console.log(recent.length); // 最大10件
+	 * console.log(recent.length); // Up to 10 entries
 	 * ```
 	 */
 	static getRecent(evaluations: TimingEvaluation[], count: number): TimingEvaluation[] {
@@ -275,7 +275,7 @@ export class TimingEvaluator {
 	 * const evaluations = [...]; // TimingEvaluation[]
 	 * const oneHourAgo = Date.now() - 60 * 60 * 1000;
 	 * const recent = TimingEvaluator.getByTimeRange(evaluations, oneHourAgo);
-	 * console.log(recent.length); // 直近1時間の件数
+	 * console.log(recent.length); // Entries from the last hour
 	 * ```
 	 */
 	static getByTimeRange(
@@ -300,7 +300,7 @@ export class TimingEvaluator {
 	 * ```ts
 	 * const timings = TimingCalculator.calculate(20);
 	 * const record = TimingEvaluator.createSpacingRecord(150, timings);
-	 * console.log(record.type); // 'character'（3 dot = 180ms に近い）
+	 * console.log(record.type); // 'character' because it is close to 3 dots = 180ms
 	 * ```
 	 */
 	static createSpacingRecord(
@@ -349,7 +349,7 @@ export class TimingEvaluator {
 	 * const timings = TimingCalculator.calculate(20);
 	 * const record = TimingEvaluator.createSpacingRecord(150, timings);
 	 * const evaluation = TimingEvaluator.evaluateSpacing(record);
-	 * console.log(evaluation.accuracy); // スペーシング精度
+	 * console.log(evaluation.accuracy); // Spacing accuracy
 	 * ```
 	 */
 	static evaluateSpacing(record: SpacingRecord): SpacingEvaluation {
@@ -380,7 +380,7 @@ export class TimingEvaluator {
 	 * ```ts
 	 * const evaluations = [...]; // SpacingEvaluation[]
 	 * const stats = TimingEvaluator.calculateSpacingStatistics(evaluations);
-	 * console.log(stats.averageAccuracy); // 平均精度
+	 * console.log(stats.averageAccuracy); // Average accuracy
 	 * ```
 	 */
 	static calculateSpacingStatistics(evaluations: SpacingEvaluation[]): TimingStatistics {
@@ -436,9 +436,9 @@ export class TimingEvaluator {
 	 * ```ts
 	 * const evaluations = [...]; // SpacingEvaluation[]
 	 * const classified = TimingEvaluator.classifyBySpacingType(evaluations);
-	 * console.log(classified.element.length); // 要素間スペースの数
-	 * console.log(classified.character.length); // 文字間スペースの数
-	 * console.log(classified.word.length); // 単語間スペースの数
+	 * console.log(classified.element.length); // Number of element spaces
+	 * console.log(classified.character.length); // Number of character spaces
+	 * console.log(classified.word.length); // Number of word spaces
 	 * ```
 	 */
 	static classifyBySpacingType(evaluations: SpacingEvaluation[]): {

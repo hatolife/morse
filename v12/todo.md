@@ -11,3 +11,8 @@
 - [x] Replace Japanese runtime log/error strings in v12 app/lib source.
 - [x] Keep built-in listening template display titles localized even when source data has fallback titles.
 - [x] Re-run hardcoded-string checks and type-check.
+
+## Documentation/comment cleanup
+
+- [x] Convert Japanese comments in timing evaluator examples that look like hardcoded runtime strings.
+- [x] Re-run runtime-string search after documentation cleanup.
