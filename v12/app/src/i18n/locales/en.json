@@ -139,7 +139,12 @@
 		"squeezeOn": "Squeeze ON",
 		"squeezeOff": "Squeeze OFF",
 		"gapOn": "Gap ON",
-		"gapOff": "Gap OFF"
+		"gapOff": "Gap OFF",
+		"noPaddleInputData": "(No paddle input data)",
+		"noEvent": "(No events)",
+		"noSqueeze": "(No squeeze)",
+		"noGap": "(No gap)",
+		"relativeTime": "Relative Time"
 	},
 	"flashcard": {
 		"title": "CW Abbreviations & Q Codes",
@@ -361,6 +366,63 @@
 			"news": "News",
 			"literature": "Literature",
 			"technical": "Technical"
+		},
+		"categories": {
+			"qso": "Rubber Stamp QSO",
+			"text100": "100-char Text",
+			"text200": "200-char Text",
+			"text300": "300-char Text",
+			"custom": "User Defined"
+		},
+		"templates": {
+			"randomQso": "Generate Random QSO",
+			"randomQsoDescription": "Creates a complete QSO with randomly generated callsigns, locations, names, RS reports, rigs, and more. Practice with different content every time.",
+			"qsoRubberstamp1": "Rubber Stamp QSO Example: Complete Contact",
+			"qsoShort1": "QSO Example: Short Contact (CQ Call and Reply)",
+			"qsoShort2": "QSO Example: Greeting and Signal Report Only",
+			"text1001": "Text Example 1: Self Introduction",
+			"text1002": "Text Example 2: Weather",
+			"text1003": "Text Example 3: Hobbies",
+			"text2001": "Text Example 1: History of Amateur Radio",
+			"text2002": "Text Example 2: Travel Memory",
+			"text3001": "Text Example 1: Learning Morse Code",
+			"text3002": "Text Example 2: Enjoying Radio Contacts"
+		},
+		"customTemplate": {
+			"createTitle": "Create Template",
+			"editTitle": "Edit Template",
+			"titleLabel": "Title:",
+			"titlePlaceholder": "Enter a title",
+			"contentLabel": "Content:",
+			"contentPlaceholder": "Enter text to convert to Morse code",
+			"requiredAlert": "Enter both title and content.",
+			"deleteConfirm": "Delete this template?",
+			"empty": "No templates",
+			"createButton": "Create",
+			"selectButton": "Select",
+			"editButton": "Edit",
+			"deleteButton": "Delete"
+		},
+		"practice": {
+			"backToList": "Back to List",
+			"playTitle": "Play",
+			"pauseTitle": "Pause",
+			"stopTitle": "Stop",
+			"downloadTitle": "Download as WAV",
+			"inputLabel": "Enter what you heard:",
+			"inputPlaceholder": "Type what you heard...",
+			"checkButton": "Check",
+			"showAnswer": "Show Answer",
+			"hideAnswer": "Hide Answer",
+			"answerTitle": "Answer",
+			"resultTitle": "Result",
+			"accuracy": "Accuracy:",
+			"correctText": "Correct:",
+			"inputText": "Input:",
+			"noInput": "(No input)",
+			"normalView": "Normal View",
+			"dialogView": "Dialog View",
+			"wavError": "Failed to generate WAV file."
 		}
 	},
 	"settings": {
@@ -372,14 +434,27 @@
 			"volume": "Volume",
 			"volumeValue": "{value}%",
 			"wpm": "Speed (WPM)",
-			"wpmValue": "{value} WPM"
+			"wpmValue": "{value} WPM",
+			"characterSpeed": "Character Speed (WPM)",
+			"effectiveSpeed": "Effective Speed (WPM)",
+			"bFrequency": "Side B Frequency (Hz)",
+			"testPlay": "Test Playback"
 		},
 		"keybindings": {
 			"title": "Key Bindings",
 			"leftPaddle": "Left Paddle",
 			"rightPaddle": "Right Paddle",
 			"straightKey": "Straight Key",
-			"pressKey": "Press a key"
+			"pressKey": "Press a key",
+			"clickToSet": "Click, then press a key",
+			"paddleLayout": "Paddle Layout",
+			"paddleLayoutNormal": "Normal (Left=dit / Right=dah)",
+			"paddleLayoutReversed": "Reversed (Left=dah / Right=dit)"
+		},
+		"practice": {
+			"duration": "Practice Duration (sec: 30-300)",
+			"groupSize": "Group Size (chars: 3-10)",
+			"showInput": "Show Input"
 		},
 		"display": {
 			"title": "Display Settings",

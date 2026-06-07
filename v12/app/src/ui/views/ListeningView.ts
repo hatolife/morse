@@ -13,6 +13,7 @@ import {
 import { downloadBlob, sanitizeFilename } from '../../utils/download-helper';
 import { SettingsModal, ALL_SETTING_ITEMS, type SettingValues } from 'morse-engine';
 import { t } from '../../i18n';
+import { getSettingsModalTexts, localizeSettingItems } from '../../i18n/settings-modal';
 import { LanguageSwitcher } from '../components/LanguageSwitcher';
 
 interface ListeningSettings {
@@ -29,6 +30,20 @@ const DEFAULT_SETTINGS: ListeningSettings = {
 	frequency: 700,
 	bFrequency: 600,  // B側のデフォルト周波数
 	volume: 0.7
+};
+
+const TEMPLATE_TITLE_KEYS: Record<string, string> = {
+	'qso-random-generate': 'listening.templates.randomQso',
+	'qso-rubberstamp-1': 'listening.templates.qsoRubberstamp1',
+	'qso-short-1': 'listening.templates.qsoShort1',
+	'qso-short-2': 'listening.templates.qsoShort2',
+	'text100-1': 'listening.templates.text1001',
+	'text100-2': 'listening.templates.text1002',
+	'text100-3': 'listening.templates.text1003',
+	'text200-1': 'listening.templates.text2001',
+	'text200-2': 'listening.templates.text2002',
+	'text300-1': 'listening.templates.text3001',
+	'text300-2': 'listening.templates.text3002'
 };
 
 interface State {
@@ -152,7 +167,7 @@ export class ListeningView implements View {
 			const randomButton: ListeningTemplate = {
 				id: 'qso-random-generate',
 				category: 'qso',
-				title: 'ランダムQSO生成',
+				title: t('listening.templates.randomQso'),
 				content: ''
 			};
 			return [randomButton, ...this.customTemplates];
@@ -163,7 +178,7 @@ export class ListeningView implements View {
 				const randomButton: ListeningTemplate = {
 					id: 'qso-random-generate',
 					category: 'qso',
-					title: 'ランダムQSO生成',
+					title: t('listening.templates.randomQso'),
 					content: ''
 				};
 				return [randomButton, ...builtin];
@@ -204,6 +219,11 @@ export class ListeningView implements View {
 			return template.dialog.map(seg => seg.text).join(' BT ');
 		}
 		return template.content || '';
+	}
+
+	private getTemplateTitle(template: ListeningTemplate): string {
+		const key = TEMPLATE_TITLE_KEYS[template.id];
+		return key ? t(key) : template.title;
 	}
 
 	/**
@@ -292,18 +312,18 @@ export class ListeningView implements View {
 		modal.className = 'modal-overlay';
 		modal.innerHTML = `
 			<div class="modal">
-				<h2>${isEdit ? 'テンプレート編集' : 'テンプレート新規作成'}</h2>
+				<h2>${isEdit ? t('listening.customTemplate.editTitle') : t('listening.customTemplate.createTitle')}</h2>
 				<div class="form-group">
-					<label for="templateTitle">タイトル:</label>
-					<input type="text" id="templateTitle" value="${title}" placeholder="タイトルを入力">
+					<label for="templateTitle">${t('listening.customTemplate.titleLabel')}</label>
+					<input type="text" id="templateTitle" value="${title}" placeholder="${t('listening.customTemplate.titlePlaceholder')}">
 				</div>
 				<div class="form-group">
-					<label for="templateContent">内容:</label>
-					<textarea id="templateContent" placeholder="モールス信号に変換するテキストを入力">${content}</textarea>
+					<label for="templateContent">${t('listening.customTemplate.contentLabel')}</label>
+					<textarea id="templateContent" placeholder="${t('listening.customTemplate.contentPlaceholder')}">${content}</textarea>
 				</div>
 				<div class="modal-actions">
-					<button id="saveTemplateBtn" class="btn btn-primary">保存</button>
-					<button id="cancelTemplateBtn" class="btn">キャンセル</button>
+					<button id="saveTemplateBtn" class="btn btn-primary">${t('common.save')}</button>
+					<button id="cancelTemplateBtn" class="btn">${t('common.cancel')}</button>
 				</div>
 			</div>
 		`;
@@ -315,7 +335,7 @@ export class ListeningView implements View {
 			const contentInput = document.getElementById('templateContent') as HTMLTextAreaElement;
 
 			if (!titleInput.value.trim() || !contentInput.value.trim()) {
-				alert('タイトルと内容を入力してください');
+				alert(t('listening.customTemplate.requiredAlert'));
 				return;
 			}
 
@@ -353,7 +373,7 @@ export class ListeningView implements View {
 	}
 
 	private deleteCustomTemplate(id: string): void {
-		if (confirm('この定型文を削除しますか?')) {
+		if (confirm(t('listening.customTemplate.deleteConfirm'))) {
 			this.customTemplates = this.customTemplates.filter(t => t.id !== id);
 			this.saveCustomTemplates();
 			this.render();
@@ -378,7 +398,7 @@ export class ListeningView implements View {
 		//! SettingsModalを作成。
 		const modal = new SettingsModal(
 			'listening-settings-modal',
-			ALL_SETTING_ITEMS,
+			localizeSettingItems(ALL_SETTING_ITEMS),
 			currentValues,
 			{
 				onSave: (values: SettingValues) => {
@@ -437,7 +457,8 @@ export class ListeningView implements View {
 					await new Promise(resolve => setTimeout(resolve, 500));
 					await this.audioB.playMorseString(morse);
 				}
-			}
+			},
+			getSettingsModalTexts()
 		);
 
 		//! モーダルを表示。
@@ -481,11 +502,11 @@ export class ListeningView implements View {
 
 	private renderCategoryTabs(): string {
 		const categories: { id: TemplateCategory | 'custom'; label: string }[] = [
-			{ id: 'qso', label: 'ラバースタンプQSO' },
-			{ id: 'text100', label: '英文100字' },
-			{ id: 'text200', label: '英文200字' },
-			{ id: 'text300', label: '英文300字' },
-			{ id: 'custom', label: 'ユーザー定義' }
+			{ id: 'qso', label: t('listening.categories.qso') },
+			{ id: 'text100', label: t('listening.categories.text100') },
+			{ id: 'text200', label: t('listening.categories.text200') },
+			{ id: 'text300', label: t('listening.categories.text300') },
+			{ id: 'custom', label: t('listening.categories.custom') }
 		];
 
 		return categories
@@ -505,32 +526,32 @@ export class ListeningView implements View {
 		if (templates.length === 0 || (templates.length === 1 && templates[0].id === 'qso-random-generate')) {
 			return `
 				<div class="empty-state">
-					<p>定型文がありません</p>
-					${this.state.currentCategory === 'custom' ? '<button id="addCustomBtn" class="btn btn-primary">新規作成</button>' : ''}
+					<p>${t('listening.customTemplate.empty')}</p>
+					${this.state.currentCategory === 'custom' ? `<button id="addCustomBtn" class="btn btn-primary">${t('listening.customTemplate.createButton')}</button>` : ''}
 				</div>
 			`;
 		}
 
 		return `
 			<div class="template-list">
-				${this.state.currentCategory === 'custom' ? '<button id="addCustomBtn" class="btn btn-primary">新規作成</button>' : ''}
+				${this.state.currentCategory === 'custom' ? `<button id="addCustomBtn" class="btn btn-primary">${t('listening.customTemplate.createButton')}</button>` : ''}
 				${templates
 					.map(template => {
 						const text = this.getTemplateText(template);
 						const preview = template.id === 'qso-random-generate'
-							? 'コールサイン、地名、名前、RSレポート、リグなどがランダムに生成された完全なQSOが作成されます。毎回異なる内容で練習できます。'
+							? t('listening.templates.randomQsoDescription')
 							: `${text.substring(0, 100)}${text.length > 100 ? '...' : ''}`;
 						return `
 					<div class="template-card" data-template-id="${template.id}">
-						<h3>${template.title}</h3>
+						<h3>${this.getTemplateTitle(template)}</h3>
 						<p class="template-preview">${preview}</p>
 						<div class="template-actions">
-							<button class="btn select-btn" data-template-id="${template.id}">選択</button>
+							<button class="btn select-btn" data-template-id="${template.id}">${t('listening.customTemplate.selectButton')}</button>
 							${
 								this.state.currentCategory === 'custom' && template.id !== 'qso-random-generate'
 									? `
-								<button class="btn edit-btn" data-template-id="${template.id}">編集</button>
-								<button class="btn delete-btn" data-template-id="${template.id}">削除</button>
+								<button class="btn edit-btn" data-template-id="${template.id}">${t('listening.customTemplate.editButton')}</button>
+								<button class="btn delete-btn" data-template-id="${template.id}">${t('listening.customTemplate.deleteButton')}</button>
 							`
 									: ''
 							}
@@ -549,27 +570,27 @@ export class ListeningView implements View {
 		return `
 			<div class="practice-area">
 				<div class="practice-header">
-					<h2>${this.state.selectedTemplate.title}</h2>
-					<button id="backToListBtn" class="btn">一覧に戻る</button>
+					<h2>${this.getTemplateTitle(this.state.selectedTemplate)}</h2>
+					<button id="backToListBtn" class="btn">${t('listening.practice.backToList')}</button>
 				</div>
 
 				<div class="playback-controls">
-					<button id="playBtn" class="control-btn" title="再生" ${this.state.isPlaying ? 'disabled' : ''}>
+					<button id="playBtn" class="control-btn" title="${t('listening.practice.playTitle')}" ${this.state.isPlaying ? 'disabled' : ''}>
 						<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
 							<path d="M8 5v14l11-7z"/>
 						</svg>
 					</button>
-					<button id="pauseBtn" class="control-btn" title="一時停止" ${!this.state.isPlaying ? 'disabled' : ''}>
+					<button id="pauseBtn" class="control-btn" title="${t('listening.practice.pauseTitle')}" ${!this.state.isPlaying ? 'disabled' : ''}>
 						<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
 							<path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
 						</svg>
 					</button>
-					<button id="stopBtn" class="control-btn" title="停止">
+					<button id="stopBtn" class="control-btn" title="${t('listening.practice.stopTitle')}">
 						<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
 							<rect x="6" y="6" width="12" height="12"/>
 						</svg>
 					</button>
-					<button id="downloadBtn" class="control-btn" title="WAVファイルとしてダウンロード">
+					<button id="downloadBtn" class="control-btn" title="${t('listening.practice.downloadTitle')}">
 						<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
 							<path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
 						</svg>
@@ -587,13 +608,13 @@ export class ListeningView implements View {
 
 		practiceInputArea.innerHTML = `
 			<div class="input-section">
-				<label for="userInput">聞き取った内容を入力してください:</label>
-				<textarea id="userInput" class="input-area" placeholder="聞き取った文字を入力...">${this.state.userInput}</textarea>
+				<label for="userInput">${t('listening.practice.inputLabel')}</label>
+				<textarea id="userInput" class="input-area" placeholder="${t('listening.practice.inputPlaceholder')}">${this.state.userInput}</textarea>
 			</div>
 
 			<div class="action-buttons">
-				<button id="checkBtn" class="btn btn-primary">採点</button>
-				<button id="showAnswerBtn" class="btn">${this.state.showAnswer ? '正解を非表示' : '正解を表示'}</button>
+				<button id="checkBtn" class="btn btn-primary">${t('listening.practice.checkButton')}</button>
+				<button id="showAnswerBtn" class="btn">${this.state.showAnswer ? t('listening.practice.hideAnswer') : t('listening.practice.showAnswer')}</button>
 			</div>
 
 			${this.state.showAnswer ? '<div id="answerArea"></div>' : ''}
@@ -634,7 +655,7 @@ export class ListeningView implements View {
 
 		//! 対話形式ボタン（QSOの場合のみ表示）。
 		const dialogButton = isQSO
-			? `<button id="toggleDialogBtn" class="btn" style="margin-left: 10px;">${this.state.showDialogFormat ? '通常表示' : '対話形式で表示'}</button>`
+			? `<button id="toggleDialogBtn" class="btn" style="margin-left: 10px;">${this.state.showDialogFormat ? t('listening.practice.normalView') : t('listening.practice.dialogView')}</button>`
 			: '';
 
 		//! 対話形式表示の生成。
@@ -663,7 +684,7 @@ export class ListeningView implements View {
 
 		answerArea.innerHTML = `
 			<div class="answer-area">
-				<h3 style="display: inline-block;">正解</h3>
+				<h3 style="display: inline-block;">${t('listening.practice.answerTitle')}</h3>
 				${dialogButton}
 				${answerContent}
 			</div>
@@ -687,16 +708,16 @@ export class ListeningView implements View {
 
 		resultArea.innerHTML = `
 			<div class="result-area">
-				<h3>結果</h3>
-				<div class="accuracy">正答率: ${accuracy}%</div>
+				<h3>${t('listening.practice.resultTitle')}</h3>
+				<div class="accuracy">${t('listening.practice.accuracy')} ${accuracy}%</div>
 				<div class="comparison">
 					<div class="comparison-row">
-						<strong>正解:</strong>
+						<strong>${t('listening.practice.correctText')}</strong>
 						<div class="comparison-text">${correctText}</div>
 					</div>
 					<div class="comparison-row">
-						<strong>入力:</strong>
-						<div class="comparison-text">${this.state.userInput || '（未入力）'}</div>
+						<strong>${t('listening.practice.inputText')}</strong>
+						<div class="comparison-text">${this.state.userInput || t('listening.practice.noInput')}</div>
 					</div>
 				</div>
 			</div>
@@ -850,8 +871,8 @@ export class ListeningView implements View {
 			const filename = `${sanitizeFilename(this.state.selectedTemplate.title)}.wav`;
 			downloadBlob(wavBlob, filename);
 		} catch (error) {
-			console.error('WAVダウンロードエラー:', error);
-			alert('WAVファイルの生成に失敗しました。');
+			console.error('WAV download error:', error);
+			alert(t('listening.practice.wavError'));
 		}
 	}
 

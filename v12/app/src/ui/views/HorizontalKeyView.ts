@@ -16,6 +16,7 @@ import {
 } from 'morse-engine';
 import { SettingsModal, ALL_SETTING_ITEMS, type SettingValues } from 'morse-engine';
 import { t } from '../../i18n';
+import { getSettingsModalTexts, localizeSettingItems } from '../../i18n/settings-modal';
 import { LanguageSwitcher } from '../components/LanguageSwitcher';
 
 /**
@@ -410,34 +411,34 @@ export class HorizontalKeyView implements View {
 			if (leftPaddle) {
 				leftPaddle.className = 'paddle-button dit';
 				leftPaddle.innerHTML = `
-					DIT
-					<span class="paddle-label">(短点)</span>
-					<span class="paddle-key">J キー</span>
+					${t('horizontalKey.dit')}
+					<span class="paddle-label">${t('horizontalKey.ditLabel')}</span>
+					<span class="paddle-key">${t('horizontalKey.jKey')}</span>
 				`;
 			}
 			if (rightPaddle) {
 				rightPaddle.className = 'paddle-button dah';
 				rightPaddle.innerHTML = `
-					DAH
-					<span class="paddle-label">(長点)</span>
-					<span class="paddle-key">K キー</span>
+					${t('horizontalKey.dah')}
+					<span class="paddle-label">${t('horizontalKey.dahLabel')}</span>
+					<span class="paddle-key">${t('horizontalKey.kKey')}</span>
 				`;
 			}
 		} else {
 			if (leftPaddle) {
 				leftPaddle.className = 'paddle-button dah';
 				leftPaddle.innerHTML = `
-					DAH
-					<span class="paddle-label">(長点)</span>
-					<span class="paddle-key">J キー</span>
+					${t('horizontalKey.dah')}
+					<span class="paddle-label">${t('horizontalKey.dahLabel')}</span>
+					<span class="paddle-key">${t('horizontalKey.jKey')}</span>
 				`;
 			}
 			if (rightPaddle) {
 				rightPaddle.className = 'paddle-button dit';
 				rightPaddle.innerHTML = `
-					DIT
-					<span class="paddle-label">(短点)</span>
-					<span class="paddle-key">K キー</span>
+					${t('horizontalKey.dit')}
+					<span class="paddle-label">${t('horizontalKey.ditLabel')}</span>
+					<span class="paddle-key">${t('horizontalKey.kKey')}</span>
 				`;
 			}
 		}
@@ -571,7 +572,7 @@ export class HorizontalKeyView implements View {
 		if (!container) return;
 
 		if (!wordData) {
-			container.innerHTML = '（文字が確定すると表示されます）';
+			container.innerHTML = t('horizontalKey.timingDiagramPlaceholder');
 			return;
 		}
 
@@ -601,7 +602,7 @@ export class HorizontalKeyView implements View {
 	 */
 	private generateTimingChart(wordData: WordTimingData): string {
 		if (wordData.paddleInputs.length === 0) {
-			return '<div class="timing-chart-empty">（パドル入力データなし）</div>';
+			return `<div class="timing-chart-empty">${t('horizontalKey.noPaddleInputData')}</div>`;
 		}
 
 		//! パドル入力イベントを時刻順にソート。
@@ -677,7 +678,7 @@ export class HorizontalKeyView implements View {
 
 		return `
 			<div class="timing-chart-section">
-				<h4>タイミングチャート</h4>
+				<h4>${t('horizontalKey.timingDiagram')}</h4>
 				<div class="timing-chart-container">
 					<div class="timing-chart-signals">
 						<div class="squeeze-highlights-layer">
@@ -704,7 +705,7 @@ export class HorizontalKeyView implements View {
 		startTime: number,
 		totalTime: number
 	): string {
-		const label = paddle === 'left' ? 'Dit入力' : 'Dash入力';
+		const label = paddle === 'left' ? t('horizontalKey.ditInput') : t('horizontalKey.dahInput');
 		//! 該当パドルのイベントを抽出して時刻順にソート。
 		const events = wordData.paddleInputs
 			.filter(e => e.paddle === paddle)
@@ -810,7 +811,7 @@ export class HorizontalKeyView implements View {
 
 		return `
 			<div class="timing-chart-signal">
-				<div class="signal-label">出力</div>
+				<div class="signal-label">${t('horizontalKey.output')}</div>
 				<div class="signal-timeline">${segmentsHTML.join('')}</div>
 			</div>
 		`;
@@ -845,7 +846,7 @@ export class HorizontalKeyView implements View {
 		const eventLines = sortedInputs.map(event => {
 			const relativeTime = event.timestamp - startTime;
 			const paddleLabel = event.paddle === 'left' ? 'Dit' : 'Dash';
-			const stateLabel = event.state === 'press' ? '押下' : '解放';
+			const stateLabel = event.state === 'press' ? t('horizontalKey.press') : t('horizontalKey.release');
 			return `${relativeTime.toFixed(0)}ms: ${paddleLabel}${stateLabel}`;
 		});
 
@@ -854,7 +855,7 @@ export class HorizontalKeyView implements View {
 			const startRelative = interval.startTime - startTime;
 			const endRelative = interval.endTime - startTime;
 			const duration = interval.endTime - interval.startTime;
-			return `Squeeze ON: ${startRelative.toFixed(0)}ms, OFF: ${endRelative.toFixed(0)}ms (${duration.toFixed(0)}ms)`;
+			return `${t('horizontalKey.squeezeOn')}: ${startRelative.toFixed(0)}ms, ${t('horizontalKey.squeezeOff')}: ${endRelative.toFixed(0)}ms (${duration.toFixed(0)}ms)`;
 		});
 
 		//! 無入力期間（ギャップ）リストを生成。
@@ -862,27 +863,27 @@ export class HorizontalKeyView implements View {
 			const startRelative = gap.startTime - startTime;
 			const endRelative = gap.endTime - startTime;
 			const duration = gap.endTime - gap.startTime;
-			return `Gap ON: ${startRelative.toFixed(0)}ms, OFF: ${endRelative.toFixed(0)}ms (${duration.toFixed(0)}ms)`;
+			return `${t('horizontalKey.gapOn')}: ${startRelative.toFixed(0)}ms, ${t('horizontalKey.gapOff')}: ${endRelative.toFixed(0)}ms (${duration.toFixed(0)}ms)`;
 		});
 
 		return `
 			<div class="timing-debug-info">
 				<div class="debug-section">
-					<h5>パドル入力イベント（相対時刻）</h5>
+					<h5>${t('horizontalKey.paddleInput')} (${t('horizontalKey.relativeTime')})</h5>
 					<div class="debug-events">
-						${eventLines.length > 0 ? eventLines.join('<br>') : '（イベントなし）'}
+						${eventLines.length > 0 ? eventLines.join('<br>') : t('horizontalKey.noEvent')}
 					</div>
 				</div>
 				<div class="debug-section">
-					<h5>スクイーズ区間</h5>
+					<h5>${t('horizontalKey.squeezeZone')}</h5>
 					<div class="debug-squeezes">
-						${squeezeLines.length > 0 ? squeezeLines.join('<br>') : '（スクイーズなし）'}
+						${squeezeLines.length > 0 ? squeezeLines.join('<br>') : t('horizontalKey.noSqueeze')}
 					</div>
 				</div>
 				<div class="debug-section">
-					<h5>無入力期間</h5>
+					<h5>${t('horizontalKey.gapZone')}</h5>
 					<div class="debug-gaps">
-						${gapLines.length > 0 ? gapLines.join('<br>') : '（ギャップなし）'}
+						${gapLines.length > 0 ? gapLines.join('<br>') : t('horizontalKey.noGap')}
 					</div>
 				</div>
 			</div>
@@ -918,7 +919,7 @@ export class HorizontalKeyView implements View {
 		//! SettingsModalを作成。
 		const modal = new SettingsModal(
 			'horizontal-key-settings-modal',
-			ALL_SETTING_ITEMS,
+			localizeSettingItems(ALL_SETTING_ITEMS),
 			currentValues,
 			{
 				onSave: (values: SettingValues) => {
@@ -964,7 +965,8 @@ export class HorizontalKeyView implements View {
 					this.leftKeyCode = savedSettings.leftKeyCode;
 					this.rightKeyCode = savedSettings.rightKeyCode;
 				}
-			}
+			},
+			getSettingsModalTexts()
 		);
 
 		//! モーダルを表示。

@@ -152,6 +152,11 @@ export interface Translations {
 		squeezeOff: string;
 		gapOn: string;
 		gapOff: string;
+		noPaddleInputData: string;
+		noEvent: string;
+		noSqueeze: string;
+		noGap: string;
+		relativeTime: string;
 	};
 	flashcard: {
 		title: string;
@@ -374,6 +379,63 @@ export interface Translations {
 			literature: string;
 			technical: string;
 		};
+		categories: {
+			qso: string;
+			text100: string;
+			text200: string;
+			text300: string;
+			custom: string;
+		};
+		templates: {
+			randomQso: string;
+			randomQsoDescription: string;
+			qsoRubberstamp1: string;
+			qsoShort1: string;
+			qsoShort2: string;
+			text1001: string;
+			text1002: string;
+			text1003: string;
+			text2001: string;
+			text2002: string;
+			text3001: string;
+			text3002: string;
+		};
+		customTemplate: {
+			createTitle: string;
+			editTitle: string;
+			titleLabel: string;
+			titlePlaceholder: string;
+			contentLabel: string;
+			contentPlaceholder: string;
+			requiredAlert: string;
+			deleteConfirm: string;
+			empty: string;
+			createButton: string;
+			selectButton: string;
+			editButton: string;
+			deleteButton: string;
+		};
+		practice: {
+			backToList: string;
+			playTitle: string;
+			pauseTitle: string;
+			stopTitle: string;
+			downloadTitle: string;
+			inputLabel: string;
+			inputPlaceholder: string;
+			checkButton: string;
+			showAnswer: string;
+			hideAnswer: string;
+			answerTitle: string;
+			resultTitle: string;
+			accuracy: string;
+			correctText: string;
+			inputText: string;
+			noInput: string;
+			normalView: string;
+			dialogView: string;
+			wavError: string;
+		};
 	};
 	settings: {
 		title: string;
@@ -385,6 +447,10 @@ export interface Translations {
 			volumeValue: string;
 			wpm: string;
 			wpmValue: string;
+			characterSpeed: string;
+			effectiveSpeed: string;
+			bFrequency: string;
+			testPlay: string;
 		};
 		keybindings: {
 			title: string;
@@ -392,6 +458,15 @@ export interface Translations {
 			rightPaddle: string;
 			straightKey: string;
 			pressKey: string;
+			clickToSet: string;
+			paddleLayout: string;
+			paddleLayoutNormal: string;
+			paddleLayoutReversed: string;
+		};
+		practice: {
+			duration: string;
+			groupSize: string;
+			showInput: string;
 		};
 		display: {
 			title: string;

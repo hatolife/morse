@@ -22,6 +22,7 @@ import {
 import { loadFlashcardData } from '../../utils/flashcard-loader';
 import { SettingsModal, ALL_SETTING_ITEMS, type SettingValues } from 'morse-engine';
 import { t } from '../../i18n';
+import { getSettingsModalTexts, localizeSettingItems } from '../../i18n/settings-modal';
 import { LanguageSwitcher } from '../components/LanguageSwitcher';
 
 /**
@@ -879,50 +880,50 @@ export class FlashcardView implements View {
 
 			<div class="container">
 				<header class="header">
-					<button class="back-btn">メニューに戻る</button>
-					<h1>CW略語・Q符号学習</h1>
+					<button class="back-btn">${t('common.backToMenu')}</button>
+					<h1>${t('flashcard.title')}</h1>
 				</header>
 
 				<div class="tabs">
-					<button class="tab-button" data-tab="browse">一覧</button>
-					<button class="tab-button" data-tab="learn">学習モード</button>
-					<button class="tab-button active" data-tab="exam">試験モード</button>
+					<button class="tab-button" data-tab="browse">${t('flashcard.tabs.browse')}</button>
+					<button class="tab-button" data-tab="learn">${t('flashcard.tabs.learn')}</button>
+					<button class="tab-button active" data-tab="exam">${t('flashcard.tabs.exam')}</button>
 				</div>
 
 				<div class="flashcard-container">
 					${this.renderFilterSection()}
 
 					<div class="exam-setup-section">
-						<h3>出題形式</h3>
+						<h3>${t('flashcard.exam.questionTypeLabel')}</h3>
 						<div class="question-type-buttons">
-							<button class="question-type-btn ${this.questionType === 'abbr-to-meaning' ? 'active' : ''}" data-type="abbr-to-meaning">略語→意味（基礎）</button>
-							<button class="question-type-btn ${this.questionType === 'meaning-to-abbr' ? 'active' : ''}" data-type="meaning-to-abbr">意味→略語（応用）</button>
-							<button class="question-type-btn ${this.questionType === 'morse-to-abbr' ? 'active' : ''}" data-type="morse-to-abbr">モールス音→略語（実践）</button>
-							<button class="question-type-btn ${this.questionType === 'morse-to-meaning' ? 'active' : ''}" data-type="morse-to-meaning">モールス音→意味（実践）</button>
+							<button class="question-type-btn ${this.questionType === 'abbr-to-meaning' ? 'active' : ''}" data-type="abbr-to-meaning">${t('flashcard.exam.questionTypes.abbrToMeaning')}</button>
+							<button class="question-type-btn ${this.questionType === 'meaning-to-abbr' ? 'active' : ''}" data-type="meaning-to-abbr">${t('flashcard.exam.questionTypes.meaningToAbbr')}</button>
+							<button class="question-type-btn ${this.questionType === 'morse-to-abbr' ? 'active' : ''}" data-type="morse-to-abbr">${t('flashcard.exam.questionTypes.morseToAbbr')}</button>
+							<button class="question-type-btn ${this.questionType === 'morse-to-meaning' ? 'active' : ''}" data-type="morse-to-meaning">${t('flashcard.exam.questionTypes.morseToMeaning')}</button>
 						</div>
 
-						<h3>問題数</h3>
+						<h3>${t('flashcard.exam.questionCountLabel')}</h3>
 						<div class="question-count-buttons">
-							<button class="question-count-btn ${this.questionCount === 5 ? 'active' : ''}" data-count="5">5問</button>
-							<button class="question-count-btn ${this.questionCount === 10 ? 'active' : ''}" data-count="10">10問</button>
-							<button class="question-count-btn ${this.questionCount === 20 ? 'active' : ''}" data-count="20">20問</button>
-							<button class="question-count-btn ${this.questionCount === 50 ? 'active' : ''}" data-count="50">50問</button>
-							<button class="question-count-btn ${this.questionCount === 'all' ? 'active' : ''}" data-count="all">全問</button>
+							<button class="question-count-btn ${this.questionCount === 5 ? 'active' : ''}" data-count="5">${t('flashcard.exam.questionCounts.five')}</button>
+							<button class="question-count-btn ${this.questionCount === 10 ? 'active' : ''}" data-count="10">${t('flashcard.exam.questionCounts.ten')}</button>
+							<button class="question-count-btn ${this.questionCount === 20 ? 'active' : ''}" data-count="20">${t('flashcard.exam.questionCounts.twenty')}</button>
+							<button class="question-count-btn ${this.questionCount === 50 ? 'active' : ''}" data-count="50">${t('flashcard.exam.questionCounts.fifty')}</button>
+							<button class="question-count-btn ${this.questionCount === 'all' ? 'active' : ''}" data-count="all">${t('flashcard.exam.questionCounts.all')}</button>
 						</div>
 
 						<div class="action-area">
-							<button class="btn btn-large btn-primary" id="start-exam-btn">試験開始</button>
+							<button class="btn btn-large btn-primary" id="start-exam-btn">${t('flashcard.exam.startButton')}</button>
 						</div>
 					</div>
 
 					<div class="instructions">
-						<h3>使い方</h3>
+						<h3>${t('flashcard.exam.howToUse')}</h3>
 						<ul>
-							<li>フィルターで出題範囲を絞り込みます</li>
-							<li>出題形式を選択します（略語→意味、意味→略語、モールス音から）</li>
-							<li>問題数を選択します（5問〜全問）</li>
-							<li>4つの選択肢から正解を選びます</li>
-							<li>80%以上で合格です</li>
+							<li>${t('flashcard.exam.instruction1')}</li>
+							<li>${t('flashcard.exam.instruction2')}</li>
+							<li>${t('flashcard.exam.instruction3')}</li>
+							<li>${t('flashcard.exam.instruction4')}</li>
+							<li>${t('flashcard.exam.instruction5')}</li>
 						</ul>
 					</div>
 				</div>
@@ -946,29 +947,29 @@ export class FlashcardView implements View {
 		let questionText = '';
 		switch (question.type) {
 			case 'abbr-to-meaning':
-				questionText = `次の略語の意味は？<br><strong class="question-text">${question.entry.abbreviation}</strong>`;
+				questionText = `${t('flashcard.exam.questionTemplates.abbrToMeaning')}<br><strong class="question-text">${question.entry.abbreviation}</strong>`;
 				break;
 			case 'meaning-to-abbr':
-				questionText = `次の意味を表す略語は？<br><strong class="question-text">${question.entry.english} / ${question.entry.japanese}</strong>`;
+				questionText = `${t('flashcard.exam.questionTemplates.meaningToAbbr')}<br><strong class="question-text">${question.entry.english} / ${question.entry.japanese}</strong>`;
 				break;
 			case 'morse-to-abbr':
-				questionText = `モールス音を聞いて、対応する略語は？<br><button id="replay-morse-btn" class="btn btn-secondary">🔊 もう一度再生</button>`;
+				questionText = `${t('flashcard.exam.questionTemplates.morseToAbbr')}<br><button id="replay-morse-btn" class="btn btn-secondary">${t('flashcard.exam.replayButton')}</button>`;
 				break;
 			case 'morse-to-meaning':
-				questionText = `モールス音を聞いて、対応する意味は？<br><button id="replay-morse-btn" class="btn btn-secondary">🔊 もう一度再生</button>`;
+				questionText = `${t('flashcard.exam.questionTemplates.morseToMeaning')}<br><button id="replay-morse-btn" class="btn btn-secondary">${t('flashcard.exam.replayButton')}</button>`;
 				break;
 		}
 
 		app.innerHTML = `
 			<div class="container">
 				<header class="header">
-					<h1>CW略語・Q符号学習 - 試験中</h1>
-					<button class="back-btn">中断</button>
+					<h1>${t('flashcard.exam.titleInProgress')}</h1>
+					<button class="back-btn">${t('flashcard.exam.interruptButton')}</button>
 				</header>
 
 				<div class="exam-container">
 					<div class="exam-progress">
-						<span>問題 <strong>${progress}</strong> / ${total}</span>
+						<span>${t('flashcard.exam.questionProgress')} <strong>${progress}</strong> / ${total}</span>
 					</div>
 
 					<div class="question-area">
@@ -1008,22 +1009,22 @@ export class FlashcardView implements View {
 		app.innerHTML = `
 			<div class="container">
 				<header class="header">
-					<h1>CW略語・Q符号学習 - 結果</h1>
-					<button class="back-btn">メニューに戻る</button>
+					<h1>${t('flashcard.result.title')}</h1>
+					<button class="back-btn">${t('common.backToMenu')}</button>
 				</header>
 
 				<div class="result-container">
 					<div class="score-area ${isPassed ? 'passed' : 'failed'}">
-						<h2>${isPassed ? '合格！' : '不合格'}</h2>
+						<h2>${isPassed ? t('flashcard.result.passed') : t('flashcard.result.failed')}</h2>
 						<div class="score-display">
 							<span class="score-percentage">${score.percentage}%</span>
-							<span class="score-detail">${score.correct} / ${score.total} 問正解</span>
+							<span class="score-detail">${score.correct}${t('flashcard.result.scoreDetail')}${score.total} ${t('flashcard.result.scoreUnit')}</span>
 						</div>
 					</div>
 
 					${wrongAnswers.length > 0 ? `
 						<div class="wrong-answers-section">
-							<h3>間違えた問題（${wrongAnswers.length}件）</h3>
+							<h3>${t('flashcard.result.wrongAnswersTitle')}${wrongAnswers.length}${t('flashcard.result.wrongAnswersCount')}</h3>
 							<div class="wrong-answers-list">
 								${this.results.filter(r => !r.isCorrect).map(result => `
 									<div class="wrong-answer-item">
@@ -1032,9 +1033,9 @@ export class FlashcardView implements View {
 											<span>${result.question.entry.english} / ${result.question.entry.japanese}</span>
 										</div>
 										<div class="wrong-answer-detail">
-											<span class="wrong-label">あなたの回答:</span>
+											<span class="wrong-label">${t('flashcard.result.yourAnswer')}</span>
 											<span class="wrong-user-answer">${result.userAnswer}</span>
-											<span class="correct-label">正解:</span>
+											<span class="correct-label">${t('flashcard.result.correctAnswer')}</span>
 											<span class="correct-answer">${result.question.correctAnswer}</span>
 										</div>
 										${result.question.entry.description ? `
@@ -1048,13 +1049,13 @@ export class FlashcardView implements View {
 						</div>
 					` : `
 						<div class="perfect-score">
-							<p>すべて正解しました！</p>
+							<p>${t('flashcard.result.perfectScore')}</p>
 						</div>
 					`}
 
 					<div class="action-area">
-						<button class="btn btn-primary btn-large" id="retry-btn">もう一度</button>
-						<button class="btn btn-secondary btn-large" id="back-to-setup-btn">設定に戻る</button>
+						<button class="btn btn-primary btn-large" id="retry-btn">${t('flashcard.result.retryButton')}</button>
+						<button class="btn btn-secondary btn-large" id="back-to-setup-btn">${t('flashcard.result.backToSetupButton')}</button>
 					</div>
 				</div>
 			</div>
@@ -1202,7 +1203,7 @@ export class FlashcardView implements View {
 		//! 中断ボタン。
 		const backBtn = document.querySelector('.back-btn');
 		backBtn?.addEventListener('click', () => {
-			if (confirm('試験を中断してメニューに戻りますか？')) {
+			if (confirm(t('flashcard.exam.confirmInterrupt'))) {
 				window.location.hash = '#menu';
 			}
 		});
@@ -1435,7 +1436,7 @@ export class FlashcardView implements View {
 						this.audio.scheduleTone(0, 180);  // 長点
 						await new Promise(resolve => setTimeout(resolve, 240));
 					} else if (char === ' ') {
-						await new Promise(resolve => setTimeout(resolve, 60));  // 要素間スペース
+						await new Promise(resolve => setTimeout(resolve, 60));  // Element spacing
 					}
 				}
 			}
@@ -1443,7 +1444,7 @@ export class FlashcardView implements View {
 			this.currentlyPlaying = null;
 			this.renderEntries();
 		} catch (error) {
-			console.error('モールス再生エラー:', error);
+			console.error('Morse playback error:', error);
 			this.currentlyPlaying = null;
 			this.renderEntries();
 		}
@@ -1454,14 +1455,14 @@ export class FlashcardView implements View {
 	 */
 	private startExam(): void {
 		if (this.filteredEntries.length === 0) {
-			alert('該当するエントリーがありません。フィルターを調整してください。');
+			alert(t('flashcard.exam.noEntries'));
 			return;
 		}
 
 		const count = this.questionCount === 'all' ? this.filteredEntries.length : this.questionCount;
 		const actualCount = Math.min(count, this.filteredEntries.length);
 		if (actualCount === 0) {
-			alert('問題数を1以上に設定してください。');
+			alert(t('flashcard.exam.invalidCount'));
 			return;
 		}
 
@@ -1522,7 +1523,7 @@ export class FlashcardView implements View {
 		//! SettingsModalを作成。
 		const modal = new SettingsModal(
 			'flashcard-settings-modal',
-			ALL_SETTING_ITEMS,
+			localizeSettingItems(ALL_SETTING_ITEMS),
 			currentValues,
 			{
 				onSave: (values: SettingValues) => {
@@ -1541,7 +1542,8 @@ export class FlashcardView implements View {
 					//! テスト再生。
 					await this.playMorse('CQ');
 				}
-			}
+			},
+			getSettingsModalTexts()
 		);
 
 		//! モーダルを表示。

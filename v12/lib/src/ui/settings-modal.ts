@@ -56,6 +56,16 @@ export interface SettingsModalCallbacks {
 	onTestPlay?: () => void;
 }
 
+//! 設定モーダルの表示文言。
+export interface SettingsModalTexts {
+	title?: string;
+	cancel?: string;
+	ok?: string;
+	defaultButtonText?: string;
+	keybindingPlaceholder?: string;
+	keybindingWaiting?: string;
+}
+
 /**
  * 共通設定モーダルクラス
  */
@@ -65,6 +75,7 @@ export class SettingsModal {
 	private callbacks: SettingsModalCallbacks;
 	private currentValues: SettingValues;
 	private initialValues: SettingValues;
+	private texts: Required<SettingsModalTexts>;
 
 	/**
 	 * コンストラクタ
@@ -78,13 +89,22 @@ export class SettingsModal {
 		modalId: string,
 		items: SettingItemDef[],
 		currentValues: SettingValues,
-		callbacks: SettingsModalCallbacks
+		callbacks: SettingsModalCallbacks,
+		texts: SettingsModalTexts = {}
 	) {
 		this.modalId = modalId;
 		this.items = items;
 		this.currentValues = { ...currentValues };
 		this.initialValues = { ...currentValues };
 		this.callbacks = callbacks;
+		this.texts = {
+			title: texts.title || 'Settings',
+			cancel: texts.cancel || 'Cancel',
+			ok: texts.ok || 'OK',
+			defaultButtonText: texts.defaultButtonText || 'Play',
+			keybindingPlaceholder: texts.keybindingPlaceholder || 'Press a key',
+			keybindingWaiting: texts.keybindingWaiting || 'Press a key...'
+		};
 	}
 
 	/**
@@ -123,13 +143,13 @@ export class SettingsModal {
 			return `
 				<div class="settings-modal active" id="${this.modalId}">
 					<div class="settings-content">
-						<h2>設定</h2>
+						<h2>${this.texts.title}</h2>
 						<div class="settings-grid">
 							${items.map(item => this.generateSettingItemHTML(item)).join('')}
 						</div>
 						<div class="settings-buttons">
-							<button id="${this.modalId}-cancel" class="secondary-button">キャンセル</button>
-							<button id="${this.modalId}-save" class="primary-button">OK</button>
+							<button id="${this.modalId}-cancel" class="secondary-button">${this.texts.cancel}</button>
+							<button id="${this.modalId}-save" class="primary-button">${this.texts.ok}</button>
 						</div>
 					</div>
 				</div>
@@ -140,15 +160,15 @@ export class SettingsModal {
 				<div class="modal" id="${this.modalId}">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h2>設定</h2>
+							<h2>${this.texts.title}</h2>
 							<button id="${this.modalId}-close" class="close-btn">×</button>
 						</div>
 						<div class="modal-body">
 							${items.map(item => this.generateSettingItemHTML(item)).join('')}
 						</div>
 						<div class="modal-footer">
-							<button id="${this.modalId}-cancel" class="btn">キャンセル</button>
-							<button id="${this.modalId}-save" class="btn primary">OK</button>
+							<button id="${this.modalId}-cancel" class="btn">${this.texts.cancel}</button>
+							<button id="${this.modalId}-save" class="btn primary">${this.texts.ok}</button>
 						</div>
 					</div>
 				</div>
@@ -194,7 +214,7 @@ export class SettingsModal {
 				return `
 					<div class="setting-item">
 						<span>${item.label}</span>
-						<button id="${this.modalId}-${item.key}" class="${item.buttonClass || 'test-button'}">${item.buttonText || '再生'}</button>
+						<button id="${this.modalId}-${item.key}" class="${item.buttonClass || 'test-button'}">${item.buttonText || this.texts.defaultButtonText}</button>
 					</div>
 				`;
 
@@ -227,7 +247,7 @@ export class SettingsModal {
 					<div class="setting-item">
 						<label for="${this.modalId}-${item.key}">${item.label}</label>
 						<input type="text" id="${this.modalId}-${item.key}" class="keybinding-input"
-							value="${formattedValue}" readonly placeholder="キーを押してください" data-key="${item.key}">
+							value="${formattedValue}" readonly placeholder="${this.texts.keybindingPlaceholder}" data-key="${item.key}">
 						${item.hint ? `<span class="key-hint">${item.hint}</span>` : ''}
 					</div>
 				`;
@@ -286,7 +306,7 @@ export class SettingsModal {
 			} else if (item.inputType === 'keybinding') {
 				const input = document.getElementById(`${this.modalId}-${item.key}`) as HTMLInputElement;
 				input?.addEventListener('click', () => {
-					input.value = 'キーを押してください...';
+					input.value = this.texts.keybindingWaiting;
 					input.classList.add('waiting-key');
 				});
 				input?.addEventListener('keydown', (e) => {
@@ -350,7 +370,7 @@ export const ALL_SETTING_ITEMS: SettingItemDef[] = [
 		screens: ['flashcard', 'koch', 'horizontal-key', 'vertical-key'],
 		priority: 10,
 		key: 'volume',
-		label: '音量',
+		label: 'Volume',
 		inputType: 'range-with-number',
 		min: 0,
 		max: 100,
@@ -361,7 +381,7 @@ export const ALL_SETTING_ITEMS: SettingItemDef[] = [
 		screens: ['flashcard', 'koch', 'horizontal-key', 'vertical-key'],
 		priority: 20,
 		key: 'frequency',
-		label: '周波数 (Hz)',
+		label: 'Frequency (Hz)',
 		inputType: 'number',
 		min: 400,
 		max: 1200,
@@ -371,7 +391,7 @@ export const ALL_SETTING_ITEMS: SettingItemDef[] = [
 		screens: ['flashcard', 'koch', 'horizontal-key', 'vertical-key'],
 		priority: 30,
 		key: 'wpm',
-		label: 'WPM (速度: 5-40)',
+		label: 'WPM (Speed: 5-40)',
 		inputType: 'number',
 		min: 5,
 		max: 40,
@@ -382,7 +402,7 @@ export const ALL_SETTING_ITEMS: SettingItemDef[] = [
 		screens: ['listening'],
 		priority: 5,
 		key: 'characterSpeed',
-		label: '文字速度 (WPM)',
+		label: 'Character Speed (WPM)',
 		inputType: 'number',
 		min: 5,
 		max: 40,
@@ -392,7 +412,7 @@ export const ALL_SETTING_ITEMS: SettingItemDef[] = [
 		screens: ['listening'],
 		priority: 6,
 		key: 'effectiveSpeed',
-		label: '実効速度 (WPM)',
+		label: 'Effective Speed (WPM)',
 		inputType: 'number',
 		min: 5,
 		max: 40,
@@ -402,7 +422,7 @@ export const ALL_SETTING_ITEMS: SettingItemDef[] = [
 		screens: ['listening'],
 		priority: 20,
 		key: 'frequency',
-		label: '周波数 A側 (Hz)',
+		label: 'Side A Frequency (Hz)',
 		inputType: 'number',
 		min: 400,
 		max: 1000,
@@ -412,7 +432,7 @@ export const ALL_SETTING_ITEMS: SettingItemDef[] = [
 		screens: ['listening'],
 		priority: 21,
 		key: 'bFrequency',
-		label: '周波数 B側 (Hz)',
+		label: 'Side B Frequency (Hz)',
 		inputType: 'number',
 		min: 400,
 		max: 1000,
@@ -422,7 +442,7 @@ export const ALL_SETTING_ITEMS: SettingItemDef[] = [
 		screens: ['listening'],
 		priority: 10,
 		key: 'volume',
-		label: '音量',
+		label: 'Volume',
 		inputType: 'range-with-number',
 		min: 0,
 		max: 100,
@@ -434,9 +454,9 @@ export const ALL_SETTING_ITEMS: SettingItemDef[] = [
 		screens: ['flashcard', 'listening'],
 		priority: 100,
 		key: 'testPlay',
-		label: 'テスト再生',
+		label: 'Test Playback',
 		inputType: 'button',
-		buttonText: '再生',
+		buttonText: 'Play',
 		buttonClass: 'test-button'
 	},
 	//! Koch専用の設定。
@@ -444,7 +464,7 @@ export const ALL_SETTING_ITEMS: SettingItemDef[] = [
 		screens: ['koch'],
 		priority: 5,
 		key: 'characterSpeed',
-		label: '文字速度 (WPM: 5-40)',
+		label: 'Character Speed (WPM: 5-40)',
 		inputType: 'number',
 		min: 5,
 		max: 40,
@@ -454,7 +474,7 @@ export const ALL_SETTING_ITEMS: SettingItemDef[] = [
 		screens: ['koch'],
 		priority: 6,
 		key: 'effectiveSpeed',
-		label: '実効速度 (WPM: 5-40)',
+		label: 'Effective Speed (WPM: 5-40)',
 		inputType: 'number',
 		min: 5,
 		max: 40,
@@ -464,7 +484,7 @@ export const ALL_SETTING_ITEMS: SettingItemDef[] = [
 		screens: ['koch'],
 		priority: 40,
 		key: 'practiceDuration',
-		label: '練習時間 (秒: 30-300)',
+		label: 'Practice Duration (sec: 30-300)',
 		inputType: 'number',
 		min: 30,
 		max: 300,
@@ -474,7 +494,7 @@ export const ALL_SETTING_ITEMS: SettingItemDef[] = [
 		screens: ['koch'],
 		priority: 50,
 		key: 'groupSize',
-		label: 'グループサイズ (文字: 3-10)',
+		label: 'Group Size (chars: 3-10)',
 		inputType: 'number',
 		min: 3,
 		max: 10,
@@ -484,7 +504,7 @@ export const ALL_SETTING_ITEMS: SettingItemDef[] = [
 		screens: ['koch'],
 		priority: 60,
 		key: 'showInput',
-		label: '入力を表示',
+		label: 'Show Input',
 		inputType: 'checkbox'
 	},
 	//! HorizontalKey専用の設定。
@@ -492,7 +512,7 @@ export const ALL_SETTING_ITEMS: SettingItemDef[] = [
 		screens: ['horizontal-key'],
 		priority: 40,
 		key: 'iambicMode',
-		label: 'Iambicモード',
+		label: 'Iambic Mode',
 		inputType: 'select',
 		options: [
 			{ value: 'A', label: 'Iambic A' },
@@ -503,36 +523,36 @@ export const ALL_SETTING_ITEMS: SettingItemDef[] = [
 		screens: ['horizontal-key'],
 		priority: 50,
 		key: 'paddleLayout',
-		label: 'パドルレイアウト',
+		label: 'Paddle Layout',
 		inputType: 'select',
 		options: [
-			{ value: 'normal', label: '標準（左=dit / 右=dah）' },
-			{ value: 'reversed', label: '反転（左=dah / 右=dit）' }
+			{ value: 'normal', label: 'Normal (Left=dit / Right=dah)' },
+			{ value: 'reversed', label: 'Reversed (Left=dah / Right=dit)' }
 		]
 	},
 	{
 		screens: ['horizontal-key'],
 		priority: 60,
 		key: 'leftKeyCode',
-		label: '左パドルキー',
+		label: 'Left Paddle Key',
 		inputType: 'keybinding',
-		hint: 'クリックしてキーを押す'
+		hint: 'Click, then press a key'
 	},
 	{
 		screens: ['horizontal-key'],
 		priority: 70,
 		key: 'rightKeyCode',
-		label: '右パドルキー',
+		label: 'Right Paddle Key',
 		inputType: 'keybinding',
-		hint: 'クリックしてキーを押す'
+		hint: 'Click, then press a key'
 	},
 	//! VerticalKey専用の設定。
 	{
 		screens: ['vertical-key'],
 		priority: 40,
 		key: 'keyCode',
-		label: 'キーバインド',
+		label: 'Key Binding',
 		inputType: 'keybinding',
-		hint: 'クリックしてキーを押す'
+		hint: 'Click, then press a key'
 	}
 ];

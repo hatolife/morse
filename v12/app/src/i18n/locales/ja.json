@@ -139,7 +139,12 @@
 		"squeezeOn": "Squeeze ON",
 		"squeezeOff": "Squeeze OFF",
 		"gapOn": "Gap ON",
-		"gapOff": "Gap OFF"
+		"gapOff": "Gap OFF",
+		"noPaddleInputData": "（パドル入力データなし）",
+		"noEvent": "（イベントなし）",
+		"noSqueeze": "（スクイーズなし）",
+		"noGap": "（ギャップなし）",
+		"relativeTime": "相対時刻"
 	},
 	"flashcard": {
 		"title": "CW略語・Q符号学習",
@@ -361,6 +366,63 @@
 			"news": "ニュース文",
 			"literature": "文学",
 			"technical": "技術文"
+		},
+		"categories": {
+			"qso": "ラバースタンプQSO",
+			"text100": "英文100字",
+			"text200": "英文200字",
+			"text300": "英文300字",
+			"custom": "ユーザー定義"
+		},
+		"templates": {
+			"randomQso": "ランダムQSO生成",
+			"randomQsoDescription": "コールサイン、地名、名前、RSレポート、リグなどがランダムに生成された完全なQSOが作成されます。毎回異なる内容で練習できます。",
+			"qsoRubberstamp1": "ラバースタンプQSO例: 完全な交信",
+			"qsoShort1": "QSO例: 短い交信（CQ呼び出しと応答）",
+			"qsoShort2": "QSO例: 挨拶と信号報告のみ",
+			"text1001": "英文例1: 自己紹介",
+			"text1002": "英文例2: 天気",
+			"text1003": "英文例3: 趣味",
+			"text2001": "英文例1: アマチュア無線の歴史",
+			"text2002": "英文例2: 旅行の思い出",
+			"text3001": "英文例1: モールス符号の学習",
+			"text3002": "英文例2: 無線交信の楽しみ"
+		},
+		"customTemplate": {
+			"createTitle": "テンプレート新規作成",
+			"editTitle": "テンプレート編集",
+			"titleLabel": "タイトル:",
+			"titlePlaceholder": "タイトルを入力",
+			"contentLabel": "内容:",
+			"contentPlaceholder": "モールス信号に変換するテキストを入力",
+			"requiredAlert": "タイトルと内容を入力してください",
+			"deleteConfirm": "この定型文を削除しますか?",
+			"empty": "定型文がありません",
+			"createButton": "新規作成",
+			"selectButton": "選択",
+			"editButton": "編集",
+			"deleteButton": "削除"
+		},
+		"practice": {
+			"backToList": "一覧に戻る",
+			"playTitle": "再生",
+			"pauseTitle": "一時停止",
+			"stopTitle": "停止",
+			"downloadTitle": "WAVファイルとしてダウンロード",
+			"inputLabel": "聞き取った内容を入力してください:",
+			"inputPlaceholder": "聞き取った文字を入力...",
+			"checkButton": "採点",
+			"showAnswer": "正解を表示",
+			"hideAnswer": "正解を非表示",
+			"answerTitle": "正解",
+			"resultTitle": "結果",
+			"accuracy": "正答率:",
+			"correctText": "正解:",
+			"inputText": "入力:",
+			"noInput": "（未入力）",
+			"normalView": "通常表示",
+			"dialogView": "対話形式で表示",
+			"wavError": "WAVファイルの生成に失敗しました。"
 		}
 	},
 	"settings": {
@@ -372,14 +434,27 @@
 			"volume": "音量",
 			"volumeValue": "{value}%",
 			"wpm": "速度（WPM）",
-			"wpmValue": "{value} WPM"
+			"wpmValue": "{value} WPM",
+			"characterSpeed": "文字速度 (WPM)",
+			"effectiveSpeed": "実効速度 (WPM)",
+			"bFrequency": "周波数 B側 (Hz)",
+			"testPlay": "テスト再生"
 		},
 		"keybindings": {
 			"title": "キーバインド",
 			"leftPaddle": "左パドル",
 			"rightPaddle": "右パドル",
 			"straightKey": "縦振り電鍵",
-			"pressKey": "キーを押してください"
+			"pressKey": "キーを押してください",
+			"clickToSet": "クリックしてキーを押す",
+			"paddleLayout": "パドルレイアウト",
+			"paddleLayoutNormal": "標準（左=dit / 右=dah）",
+			"paddleLayoutReversed": "反転（左=dah / 右=dit）"
+		},
+		"practice": {
+			"duration": "練習時間 (秒: 30-300)",
+			"groupSize": "グループサイズ (文字: 3-10)",
+			"showInput": "入力を表示"
 		},
 		"display": {
 			"title": "表示設定",

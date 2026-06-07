@@ -14,6 +14,7 @@ import {
 } from 'morse-engine';
 import { SettingsModal, ALL_SETTING_ITEMS, type SettingValues } from 'morse-engine';
 import { t } from '../../i18n';
+import { getSettingsModalTexts, localizeSettingItems } from '../../i18n/settings-modal';
 import { LanguageSwitcher } from '../components/LanguageSwitcher';
 
 /**
@@ -562,7 +563,7 @@ export class VerticalKeyView implements View {
 		//! SettingsModalを作成。
 		const modal = new SettingsModal(
 			'vertical-key-settings-modal',
-			ALL_SETTING_ITEMS,
+			localizeSettingItems(ALL_SETTING_ITEMS),
 			currentValues,
 			{
 				onSave: (values: SettingValues) => {
@@ -609,7 +610,8 @@ export class VerticalKeyView implements View {
 					this.currentWPM = savedSettings.wpm;
 					this.keyCode = savedSettings.keyCode;
 				}
-			}
+			},
+			getSettingsModalTexts()
 		);
 
 		//! モーダルを表示。

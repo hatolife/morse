@@ -70,4 +70,5 @@ export type {
 	SettingItemDef,
 	SettingValues,
 	SettingsModalCallbacks,
+	SettingsModalTexts,
 } from './ui/settings-modal';

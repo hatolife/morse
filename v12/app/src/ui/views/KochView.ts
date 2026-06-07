@@ -12,6 +12,7 @@ import {
 } from 'morse-engine';
 import { SettingsModal, ALL_SETTING_ITEMS, type SettingValues } from 'morse-engine';
 import { t } from '../../i18n';
+import { getSettingsModalTexts, localizeSettingItems } from '../../i18n/settings-modal';
 import { LanguageSwitcher } from '../components/LanguageSwitcher';
 
 type ViewMode = 'learning' | 'custom';
@@ -458,7 +459,7 @@ export class KochView implements View {
 		//! SettingsModalを作成。
 		const modal = new SettingsModal(
 			'koch-settings-modal',
-			ALL_SETTING_ITEMS,
+			localizeSettingItems(ALL_SETTING_ITEMS),
 			currentValues,
 			{
 				onSave: (values: SettingValues) => {
@@ -503,7 +504,8 @@ export class KochView implements View {
 						effectiveWpm: savedSettings.effectiveSpeed
 					});
 				}
-			}
+			},
+			getSettingsModalTexts()
 		);
 
 		//! モーダルを表示。
