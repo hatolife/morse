@@ -1,5 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
+const chromiumExecutablePath = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH;
+
 /**
  * Playwright E2Eテスト設定
  * @see https://playwright.dev/docs/test-configuration
@@ -49,7 +51,7 @@ export default defineConfig({
 		screenshot: 'only-on-failure',
 
 		//! ビデオ設定。
-		video: 'retain-on-failure',
+		video: 'off',
 	},
 
 	//! テスト対象ブラウザ設定（WSL環境ではchromiumのみ）。
@@ -60,10 +62,13 @@ export default defineConfig({
 				...devices['Desktop Chrome'],
 				//! WSL環境対応: GPUレンダリングを無効化してページ作成を高速化。
 				launchOptions: {
+					...(chromiumExecutablePath ? { executablePath: chromiumExecutablePath } : {}),
 					args: [
 						'--use-gl=swiftshader',
 						'--disable-gpu',
 						'--disable-dev-shm-usage',
+						'--disable-crash-reporter',
+						'--disable-crashpad',
 						'--no-sandbox',
 					],
 				},

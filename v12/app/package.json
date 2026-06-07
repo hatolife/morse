@@ -10,9 +10,9 @@
 		"copy-to-root": "rm -rf ../assets && cp -r dist/index.html dist/flashcard.tsv dist/assets ../",
 		"preview": "vite preview",
 		"type-check": "tsc --noEmit",
-		"test:e2e": "playwright test",
-		"test:e2e:ui": "playwright test --ui",
-		"test:e2e:headed": "playwright test --headed",
+		"test:e2e": "TMPDIR=/tmp playwright test",
+		"test:e2e:ui": "TMPDIR=/tmp playwright test --ui",
+		"test:e2e:headed": "TMPDIR=/tmp playwright test --headed",
 		"test:e2e:report": "playwright show-report playwright-report"
 	},
 	"dependencies": {

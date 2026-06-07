@@ -17,9 +17,9 @@
   ],
   "scripts": {
     "build": "vite build && tsc --emitDeclarationOnly --declaration --outDir dist",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage",
+    "test": "TMPDIR=/tmp vitest run",
+    "test:watch": "TMPDIR=/tmp vitest",
+    "test:coverage": "TMPDIR=/tmp vitest run --coverage",
     "type-check": "tsc --noEmit"
   },
   "keywords": [

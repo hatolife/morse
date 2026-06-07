@@ -143,7 +143,7 @@ describe('KochTrainer', () => {
 			const charSet = new Set(['A']);
 			expect(() => {
 				KochTrainer.generateCustomGroups(charSet);
-			}).toThrow('文字セットには最低2文字必要です');
+			}).toThrow('Character set must contain at least 2 characters');
 		});
 	});
 

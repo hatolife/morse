@@ -39,7 +39,7 @@ describe('ListeningTrainer', () => {
 		it('ランダムなQSOテンプレートを生成する', () => {
 			const qso = ListeningTrainer.generateRandomQSO();
 			expect(qso.category).toBe('qso');
-			expect(qso.title).toBe('ランダムQSO');
+			expect(qso.title).toBe('Random QSO');
 			expect(qso.dialog).toBeDefined();
 			expect(qso.dialog!.length).toBeGreaterThan(0);
 			expect(qso.id).toMatch(/^qso-random-\d+$/);
