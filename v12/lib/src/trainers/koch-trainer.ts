@@ -104,7 +104,7 @@ export class KochTrainer {
 	): string[] {
 		const chars = Array.from(charSet);
 		if (chars.length < 2) {
-			throw new Error('文字セットには最低2文字必要です');
+			throw new Error('Character set must contain at least 2 characters');
 		}
 		return KochTrainer.generateRandomGroups(chars, settings);
 	}

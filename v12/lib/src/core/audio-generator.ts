@@ -97,7 +97,7 @@ export class AudioGenerator {
 			oscillator.start(t0);
 			oscillator.stop(t0 + durationMs / 1000);
 		} catch (error) {
-			console.error('音声エラー:', error);
+			console.error('Audio error:', error);
 		}
 	}
 
@@ -130,7 +130,7 @@ export class AudioGenerator {
 			this.currentOscillator = oscillator;
 			this.currentGain = gainNode;
 		} catch (error) {
-			console.error('連続音開始エラー:', error);
+			console.error('Failed to start continuous tone:', error);
 		}
 	}
 
@@ -151,7 +151,7 @@ export class AudioGenerator {
 				this.currentGain = null;
 			}
 		} catch (error) {
-			console.error('連続音停止エラー:', error);
+			console.error('Failed to stop continuous tone:', error);
 		}
 	}
 
@@ -308,7 +308,7 @@ export class AudioGenerator {
 	 */
 	async generateWav(morse: string): Promise<Blob> {
 		if (!morse) {
-			throw new Error('モールス符号が空です');
+			throw new Error('Morse code is empty');
 		}
 
 		// タイミング計算

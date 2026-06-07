@@ -99,7 +99,7 @@ const QSO_TEMPLATES: ListeningTemplate[] = [
 	{
 		id: 'qso-rubberstamp-1',
 		category: 'qso',
-		title: 'ラバースタンプQSO例: 完全な交信',
+		title: 'Rubber Stamp QSO Example: Complete Contact',
 		dialog: [
 			{ side: 'A', text: 'CQ CQ CQ DE JF2SDR JF2SDR PSE K' },
 			{ side: 'B', text: 'JF2SDR DE JR2ZWA JR2ZWA K' },
@@ -113,7 +113,7 @@ const QSO_TEMPLATES: ListeningTemplate[] = [
 	{
 		id: 'qso-short-1',
 		category: 'qso',
-		title: 'QSO例: 短い交信（CQ呼び出しと応答）',
+		title: 'QSO Example: Short Contact (CQ Call and Reply)',
 		dialog: [
 			{ side: 'A', text: 'CQ CQ CQ DE JA1ABC JA1ABC PSE K' },
 			{ side: 'B', text: 'JA1ABC DE JE1XYZ JE1XYZ K' },
@@ -124,7 +124,7 @@ const QSO_TEMPLATES: ListeningTemplate[] = [
 	{
 		id: 'qso-short-2',
 		category: 'qso',
-		title: 'QSO例: 挨拶と信号報告のみ',
+		title: 'QSO Example: Greeting and Signal Report Only',
 		dialog: [
 			{ side: 'A', text: 'CQ DX CQ DX DE JH8ZZZ JH8ZZZ K' },
 			{ side: 'B', text: 'JH8ZZZ DE VK2AAA VK2AAA K' },
@@ -140,19 +140,19 @@ const TEXT100_TEMPLATES: ListeningTemplate[] = [
 	{
 		id: 'text100-1',
 		category: 'text100',
-		title: '英文例1: 自己紹介',
+		title: 'Text Example 1: Self Introduction',
 		content: 'MY NAME IS JOHN. I LIVE IN TOKYO JAPAN. I AM A STUDENT AT THE UNIVERSITY. I ENJOY LEARNING MORSE CODE IN MY FREE TIME.'
 	},
 	{
 		id: 'text100-2',
 		category: 'text100',
-		title: '英文例2: 天気',
+		title: 'Text Example 2: Weather',
 		content: 'THE WEATHER TODAY IS VERY NICE. IT IS SUNNY AND WARM. I WENT FOR A WALK IN THE PARK. MANY PEOPLE WERE ENJOYING THE SUNSHINE.'
 	},
 	{
 		id: 'text100-3',
 		category: 'text100',
-		title: '英文例3: 趣味',
+		title: 'Text Example 3: Hobbies',
 		content: 'I HAVE MANY HOBBIES. I LIKE READING BOOKS AND LISTENING TO MUSIC. ON WEEKENDS I PLAY TENNIS WITH MY FRIENDS. WE HAVE A LOT OF FUN.'
 	}
 ];
@@ -162,13 +162,13 @@ const TEXT200_TEMPLATES: ListeningTemplate[] = [
 	{
 		id: 'text200-1',
 		category: 'text200',
-		title: '英文例1: アマチュア無線の歴史',
+		title: 'Text Example 1: History of Amateur Radio',
 		content: 'AMATEUR RADIO HAS A LONG AND RICH HISTORY. IT BEGAN IN THE EARLY TWENTIETH CENTURY WHEN ENTHUSIASTS STARTED EXPERIMENTING WITH RADIO WAVES. MORSE CODE WAS THE PRIMARY MODE OF COMMUNICATION. TODAY AMATEUR RADIO CONTINUES TO BE A POPULAR HOBBY AROUND THE WORLD. OPERATORS USE VARIOUS MODES INCLUDING CW SSB AND DIGITAL MODES. IT IS A GREAT WAY TO MAKE FRIENDS AND LEARN ABOUT TECHNOLOGY.'
 	},
 	{
 		id: 'text200-2',
 		category: 'text200',
-		title: '英文例2: 旅行の思い出',
+		title: 'Text Example 2: Travel Memory',
 		content: 'LAST SUMMER I WENT ON A TRIP TO KYOTO. IT WAS MY FIRST TIME VISITING THE ANCIENT CAPITAL OF JAPAN. I VISITED MANY FAMOUS TEMPLES AND SHRINES. THE ARCHITECTURE WAS BEAUTIFUL AND THE GARDENS WERE PEACEFUL. I ALSO ENJOYED TRYING LOCAL FOODS LIKE TOFU AND GREEN TEA. THE PEOPLE WERE VERY FRIENDLY AND HELPFUL. I TOOK MANY PHOTOS TO REMEMBER THIS WONDERFUL EXPERIENCE. I HOPE TO RETURN SOMEDAY.'
 	}
 ];
@@ -178,13 +178,13 @@ const TEXT300_TEMPLATES: ListeningTemplate[] = [
 	{
 		id: 'text300-1',
 		category: 'text300',
-		title: '英文例1: モールス符号の学習',
+		title: 'Text Example 1: Learning Morse Code',
 		content: 'LEARNING MORSE CODE IS A REWARDING EXPERIENCE. AT FIRST IT MAY SEEM DIFFICULT BUT WITH REGULAR PRACTICE IT BECOMES EASIER. THE KOCH METHOD IS ONE OF THE MOST EFFECTIVE WAYS TO LEARN. IT STARTS WITH JUST TWO CHARACTERS AND GRADUALLY ADDS MORE. THIS APPROACH HELPS YOU LEARN AT A STEADY PACE. LISTENING PRACTICE IS ALSO VERY IMPORTANT. YOU SHOULD TRY TO COPY REAL MORSE CODE TRANSMISSIONS. MANY ONLINE RESOURCES ARE AVAILABLE TO HELP YOU PRACTICE. JOINING AN AMATEUR RADIO CLUB CAN ALSO BE BENEFICIAL. YOU CAN MEET OTHER ENTHUSIASTS AND SHARE EXPERIENCES. WITH DEDICATION AND PATIENCE YOU WILL MASTER MORSE CODE AND ENJOY USING IT IN YOUR RADIO COMMUNICATIONS.'
 	},
 	{
 		id: 'text300-2',
 		category: 'text300',
-		title: '英文例2: 無線交信の楽しみ',
+		title: 'Text Example 2: Enjoying Radio Contacts',
 		content: 'AMATEUR RADIO OFFERS MANY EXCITING OPPORTUNITIES. ONE OF THE GREATEST JOYS IS MAKING CONTACT WITH STATIONS AROUND THE WORLD. YOU CAN TALK TO PEOPLE FROM DIFFERENT COUNTRIES AND CULTURES. EACH CONTACT IS UNIQUE AND SPECIAL. SOME OPERATORS ENJOY CONTESTS WHERE THEY TRY TO MAKE AS MANY CONTACTS AS POSSIBLE. OTHERS PREFER RELAXED CONVERSATIONS ABOUT HOBBIES AND DAILY LIFE. DX CONTACTS WITH DISTANT STATIONS ARE PARTICULARLY THRILLING. THE THRILL OF HEARING A WEAK SIGNAL FROM FAR AWAY IS UNFORGETTABLE. OPERATING PORTABLE FROM MOUNTAINTOPS OR PARKS IS ALSO FUN. YOU CAN COMBINE YOUR LOVE OF RADIO WITH OUTDOOR ACTIVITIES. AMATEUR RADIO IS MORE THAN A HOBBY IT IS A LIFELONG PASSION.'
 	}
 ];
@@ -236,7 +236,7 @@ export class ListeningTrainer {
 		return {
 			id: `qso-random-${Date.now()}`,
 			category: 'qso',
-			title: 'ランダムQSO',
+			title: 'Random QSO',
 			dialog: [
 				{ side: 'A', text: `CQ CQ CQ DE ${myCall} ${myCall} PSE K` },
 				{ side: 'B', text: `${myCall} DE ${urCall} ${urCall} K` },

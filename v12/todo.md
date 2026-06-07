@@ -5,3 +5,9 @@
 - [x] Settings modal: make labels/buttons/keybinding prompts localizable.
 - [x] Listening view: add missing i18n keys and replace hardcoded Japanese strings.
 - [x] Verify locale key parity and run type-check/build where practical.
+
+## Follow-up cleanup
+
+- [x] Replace Japanese runtime log/error strings in v12 app/lib source.
+- [x] Keep built-in listening template display titles localized even when source data has fallback titles.
+- [x] Re-run hardcoded-string checks and type-check.

@@ -62,7 +62,7 @@ export class FlashcardState {
 				JSON.stringify(data)
 			);
 		} catch (error) {
-			console.error('進捗保存エラー:', error);
+			console.error('Failed to save progress:', error);
 		}
 	}
 
@@ -80,7 +80,7 @@ export class FlashcardState {
 				};
 			}
 		} catch (error) {
-			console.error('進捗読み込みエラー:', error);
+			console.error('Failed to load progress:', error);
 		}
 		return { known: new Set(), unknown: new Set() };
 	}
@@ -92,7 +92,7 @@ export class FlashcardState {
 		try {
 			localStorage.removeItem(`${this.STORAGE_PREFIX}progress`);
 		} catch (error) {
-			console.error('進捗クリアエラー:', error);
+			console.error('Failed to clear progress:', error);
 		}
 	}
 
@@ -111,7 +111,7 @@ export class FlashcardState {
 				JSON.stringify(data)
 			);
 		} catch (error) {
-			console.error('フィルター保存エラー:', error);
+			console.error('Failed to save filters:', error);
 		}
 	}
 
@@ -130,7 +130,7 @@ export class FlashcardState {
 				};
 			}
 		} catch (error) {
-			console.error('フィルター読み込みエラー:', error);
+			console.error('Failed to load filters:', error);
 		}
 		return {
 			selectedTags: new Set(),
@@ -149,7 +149,7 @@ export class FlashcardState {
 				JSON.stringify(state)
 			);
 		} catch (error) {
-			console.error('ビュー状態保存エラー:', error);
+			console.error('Failed to save view state:', error);
 		}
 	}
 
@@ -163,7 +163,7 @@ export class FlashcardState {
 				return JSON.parse(saved);
 			}
 		} catch (error) {
-			console.error('ビュー状態読み込みエラー:', error);
+			console.error('Failed to load view state:', error);
 		}
 		return {
 			viewMode: 'browse',

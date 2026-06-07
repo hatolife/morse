@@ -222,6 +222,9 @@ export class ListeningView implements View {
 	}
 
 	private getTemplateTitle(template: ListeningTemplate): string {
+		if (template.id.startsWith('qso-random-')) {
+			return t('listening.templates.randomQso');
+		}
 		const key = TEMPLATE_TITLE_KEYS[template.id];
 		return key ? t(key) : template.title;
 	}
