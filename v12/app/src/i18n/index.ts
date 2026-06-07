@@ -4,12 +4,15 @@
 
 import jaTranslations from './locales/ja.json';
 import enTranslations from './locales/en.json';
+import zhCNTranslations from './locales/zh-CN.json';
+import zhTWTranslations from './locales/zh-TW.json';
+import koTranslations from './locales/ko.json';
 import type { Translations, Language } from './types';
 
 /**
  * サポートされている言語
  */
-export const SUPPORTED_LANGUAGES: Language[] = ['ja', 'en'];
+export const SUPPORTED_LANGUAGES: Language[] = ['ja', 'en', 'zh-CN', 'zh-TW', 'ko'];
 
 /**
  * デフォルト言語
@@ -26,7 +29,10 @@ const STORAGE_KEY = 'morse-app-language';
  */
 const translations: Record<Language, Translations> = {
 	ja: jaTranslations as Translations,
-	en: enTranslations as Translations
+	en: enTranslations as Translations,
+	'zh-CN': zhCNTranslations as Translations,
+	'zh-TW': zhTWTranslations as Translations,
+	ko: koTranslations as Translations
 };
 
 /**
@@ -45,16 +51,34 @@ const languageChangeCallbacks: LanguageChangeCallback[] = [];
  */
 function detectBrowserLanguage(): Language {
 	const browserLang = navigator.language.toLowerCase();
+	const normalizedLanguages: Record<string, Language> = {
+		ja: 'ja',
+		'en': 'en',
+		'zh': 'zh-CN',
+		'zh-cn': 'zh-CN',
+		'zh-sg': 'zh-CN',
+		'zh-hans': 'zh-CN',
+		'zh-tw': 'zh-TW',
+		'zh-hk': 'zh-TW',
+		'zh-mo': 'zh-TW',
+		'zh-hant': 'zh-TW',
+		ko: 'ko'
+	};
+
+	if (browserLang in normalizedLanguages) {
+		return normalizedLanguages[browserLang];
+	}
 
 	// 完全一致をチェック
-	if (SUPPORTED_LANGUAGES.includes(browserLang as Language)) {
-		return browserLang as Language;
+	const exactMatch = SUPPORTED_LANGUAGES.find(lang => lang.toLowerCase() === browserLang);
+	if (exactMatch) {
+		return exactMatch;
 	}
 
 	// 言語コードのプレフィックスをチェック（例: "en-US" -> "en"）
 	const langPrefix = browserLang.split('-')[0];
-	if (SUPPORTED_LANGUAGES.includes(langPrefix as Language)) {
-		return langPrefix as Language;
+	if (langPrefix in normalizedLanguages) {
+		return normalizedLanguages[langPrefix];
 	}
 
 	return DEFAULT_LANGUAGE;
@@ -163,7 +187,10 @@ export function t(key: string, params?: Record<string, string | number>): string
 export function getLanguageName(language: Language): string {
 	const names: Record<Language, string> = {
 		ja: '日本語',
-		en: 'English'
+		en: 'English',
+		'zh-CN': '简体中文',
+		'zh-TW': '繁體中文',
+		ko: '한국어'
 	};
 	return names[language] || language;
 }

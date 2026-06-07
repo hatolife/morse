@@ -16,3 +16,11 @@
 
 - [x] Convert Japanese comments in timing evaluator examples that look like hardcoded runtime strings.
 - [x] Re-run runtime-string search after documentation cleanup.
+
+## Additional languages
+
+- [x] Add Simplified Chinese (`zh-CN`) locale scaffold and language selector entry.
+- [x] Add Traditional Chinese (`zh-TW`) locale scaffold and language selector entry.
+- [x] Add Korean (`ko`) locale scaffold and language selector entry.
+- [x] Update browser language detection for Chinese variants.
+- [ ] Review and refine all newly added Chinese/Korean CW terminology translations.

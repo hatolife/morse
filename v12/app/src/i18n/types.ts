@@ -5,7 +5,7 @@
 /**
  * サポートされている言語
  */
-export type Language = 'ja' | 'en';
+export type Language = 'ja' | 'en' | 'zh-CN' | 'zh-TW' | 'ko';
 
 /**
  * 翻訳データの型
