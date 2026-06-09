@@ -39,12 +39,19 @@ symbol	5	.	.-.-.-	period	ピリオド
 symbol	5	,	--..--	comma	カンマ
 symbol	5	:	---...	colon	コロン
 symbol	5	?	..--..	question mark	疑問符
+symbol	5	!	-.-.--	exclamation mark	感嘆符
+symbol	5	=	-...-	equals sign	等号
 symbol	5	+	.-.-.	plus	プラス
 symbol	5	-	-....-	hyphen	ハイフン
 symbol	5	×	-..-	multiplication sign	乗算記号
 symbol	5	/	-..-.	slash	スラッシュ
 symbol	5	@	.--.-.	at sign	アットマーク
+symbol	5	&	.-...	ampersand	アンパサンド
 symbol	5	(	-.--.	left parenthesis	左括弧
 symbol	5	)	-.--.-	right parenthesis	右括弧
 symbol	5	"	.-..-.	double quote	ダブルクォート
 symbol	5	'	.----.	single quote	シングルクォート
+symbol	5	;	-.-.-.	semicolon	セミコロン
+symbol	5	_	..--.-	underscore	アンダースコア
+symbol	5	$	...-..-	dollar sign	ドル記号
+symbol	5	^	......	caret	キャレット

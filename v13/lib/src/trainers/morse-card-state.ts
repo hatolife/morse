@@ -19,7 +19,6 @@ export interface MorseCardProgress {
 
 export interface MorseCardFilterState {
 	selectedCategories: Set<MorseCardCategory>;
-	selectedDifficulties: Set<number>;
 	searchQuery: string;
 }
 
@@ -61,7 +60,6 @@ export class MorseCardState {
 	static saveFilters(filters: MorseCardFilterState): void {
 		this.setJson('filters', {
 			selectedCategories: Array.from(filters.selectedCategories),
-			selectedDifficulties: Array.from(filters.selectedDifficulties),
 			searchQuery: filters.searchQuery
 		});
 	}
@@ -69,13 +67,11 @@ export class MorseCardState {
 	static loadFilters(): MorseCardFilterState {
 		const data = this.getJson<{
 			selectedCategories?: MorseCardCategory[];
-			selectedDifficulties?: number[];
 			searchQuery?: string;
 		}>('filters');
 
 		return {
 			selectedCategories: new Set(data?.selectedCategories || ['letter']),
-			selectedDifficulties: new Set(data?.selectedDifficulties || [1, 2, 3]),
 			searchQuery: data?.searchQuery || ''
 		};
 	}

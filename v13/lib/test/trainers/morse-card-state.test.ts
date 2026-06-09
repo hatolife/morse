@@ -20,13 +20,11 @@ describe('MorseCardState', () => {
 	it('saves and loads filters', () => {
 		MorseCardState.saveFilters({
 			selectedCategories: new Set(['letter', 'symbol']),
-			selectedDifficulties: new Set([1, 5]),
 			searchQuery: '.-'
 		});
 
 		const filters = MorseCardState.loadFilters();
 		expect(Array.from(filters.selectedCategories).sort()).toEqual(['letter', 'symbol']);
-		expect(Array.from(filters.selectedDifficulties).sort()).toEqual([1, 5]);
 		expect(filters.searchQuery).toBe('.-');
 	});
 });

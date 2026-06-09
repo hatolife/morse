@@ -29,6 +29,10 @@
 - [x] `npm test` を実行する
 - [x] `npm run build` を実行する
 
+## 追加対応
+
+- [x] 記号 `!`, `=`, `&`, `;`, `_`, `$`, `^` を `morse-flashcard.tsv` に追加する
+
 ## 公開成果物
 
 - [x] `v13/index.html` を生成する
