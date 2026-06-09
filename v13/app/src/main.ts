@@ -13,7 +13,7 @@ function init(): void {
 
 	//! 開発環境でのみログを出力。
 	if (import.meta.env.DEV) {
-		console.log('Morse training app v12 started');
+		console.log('Morse training app v13 started');
 	}
 
 	//! ルーターを初期化。

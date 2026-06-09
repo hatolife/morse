@@ -48,6 +48,8 @@ jobs:
             v11/app/package-lock.json
             v12/lib/package-lock.json
             v12/app/package-lock.json
+            v13/lib/package-lock.json
+            v13/app/package-lock.json
 
       # node_modulesを直接キャッシュして高速化。
       - name: Cache node_modules
@@ -67,6 +69,8 @@ jobs:
             v11/app/node_modules
             v12/lib/node_modules
             v12/app/node_modules
+            v13/lib/node_modules
+            v13/app/node_modules
           key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-modules-
@@ -260,6 +264,30 @@ jobs:
             fi
           else
             echo "Skipping v12 build: v12/lib or v12/app package-lock.json not found."
+          fi
+
+      - name: Build v13 (if v13/lib and v13/app exist)
+        shell: bash
+        run: |
+          set -euxo pipefail
+          if [ -f "v13/lib/package-lock.json" ] && [ -f "v13/app/package-lock.json" ]; then
+            # Build library first
+            cd v13/lib
+            npm ci --prefer-offline --no-audit
+            npm run build
+            cd -
+            # Build app (depends on library)
+            cd v13/app
+            npm ci --prefer-offline --no-audit
+            npm run build
+            cd -
+            # Copy all built files to v13 root for GitHub Pages (package.json has copy-to-root script)
+            # The build script already copies to v13 root, but ensure it's there
+            if [ -d "v13/app/dist" ]; then
+              cp -r v13/app/dist/index.html v13/app/dist/flashcard.tsv v13/app/dist/morse-flashcard.tsv v13/app/dist/assets v13/
+            fi
+          else
+            echo "Skipping v13 build: v13/lib or v13/app package-lock.json not found."
           fi
 
       - name: Upload Pages artifact
