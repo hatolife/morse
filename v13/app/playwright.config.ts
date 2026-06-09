@@ -35,6 +35,9 @@ export default defineConfig({
 		//! ベースURL（開発サーバー）。
 		baseURL: 'http://localhost:3000',
 
+		//! E2Eは日本語UIの文言を検証するため、ブラウザ言語を固定する。
+		locale: 'ja-JP',
+
 		//! ヘッドレスモード（WSL環境でXServerなしで動作）。
 		headless: true,
 
