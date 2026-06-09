@@ -148,7 +148,7 @@ export class FlashcardView implements View {
 
 			//! データをロード。
 			try {
-				this.allEntries = await loadFlashcardData('/flashcard.tsv');
+				this.allEntries = await loadFlashcardData('flashcard.tsv');
 				this.updateFilteredEntries();
 				//! データロード完了後、保存されていたviewModeを復元。
 				const viewState = FlashcardState.loadViewState();

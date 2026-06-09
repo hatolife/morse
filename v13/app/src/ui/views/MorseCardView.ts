@@ -87,7 +87,7 @@ export class MorseCardView implements View {
 		if (this.currentState === 'loading') {
 			this.renderLoading();
 			try {
-				this.allEntries = await loadMorseCardData('/morse-flashcard.tsv');
+				this.allEntries = await loadMorseCardData('morse-flashcard.tsv');
 				this.updateFilteredEntries();
 				this.currentState = MorseCardState.loadViewState().viewMode;
 				this.render();
