@@ -43,7 +43,7 @@ test.describe('縦振り電鍵練習', () => {
 		//! 設定項目が表示される（モーダル内のlabelを明示的に指定してstrict mode violationを回避）。
 		await expect(page.locator('.modal label:has-text("音量")')).toBeVisible();
 		await expect(page.locator('.modal label:has-text("周波数")')).toBeVisible();
-		await expect(page.locator('.modal label:has-text("WPM (速度: 5-40)")')).toBeVisible();
+		await expect(page.locator('.modal label:has-text("速度（WPM）")')).toBeVisible();
 	});
 
 	test('クリアボタンが機能する', async ({ page }) => {
