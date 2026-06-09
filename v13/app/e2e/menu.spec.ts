@@ -38,7 +38,7 @@ test.describe('メニュー画面', () => {
 	});
 
 	test('モールス符号フラッシュカード画面に遷移できる', async ({ page }) => {
-		await page.locator('.menu-item h3:has-text("モールス符号フラッシュカード")').click();
+		await page.locator('.menu-item h2:has-text("モールス符号フラッシュカード")').click();
 		await expect(page).toHaveURL(/#morse-card/);
 		await expect(page.locator('h1')).toContainText('モールス符号フラッシュカード');
 	});

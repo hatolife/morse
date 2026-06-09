@@ -60,7 +60,7 @@ test.describe('モールス信号聞き取り練習', () => {
 		//! リスニング固有の設定。
 		await expect(page.locator('text=文字速度')).toBeVisible();
 		await expect(page.locator('text=実効速度')).toBeVisible();
-		await expect(page.locator('.modal label:has-text("周波数")')).toBeVisible();
+		await expect(page.getByText('周波数', { exact: true })).toBeVisible();
 		await expect(page.locator('text=周波数 B側')).toBeVisible();
 	});
 
