@@ -1,0 +1,565 @@
+{
+	"common": {
+		"appName": "モールス練習アプリ",
+		"version": "v13 - モールス符号フラッシュカード版",
+		"backToMenu": "メニューに戻る",
+		"settings": "設定",
+		"start": "開始",
+		"stop": "停止",
+		"reset": "リセット",
+		"download": "ダウンロード",
+		"language": "言語",
+		"close": "閉じる",
+		"save": "保存",
+		"cancel": "キャンセル",
+		"copyright": "© 2025 モールス練習アプリ"
+	},
+	"menu": {
+		"title": "モールス練習アプリ",
+		"subtitle": "メニュー",
+		"items": {
+			"vertical": {
+				"title": "縦振り電鍵練習",
+				"description": "上下に動かす電鍵（ストレートキー）の練習"
+			},
+			"horizontal": {
+				"title": "横振り電鍵練習",
+				"description": "左右に動かす電鍵（パドル）の練習（Iambic A/B対応）"
+			},
+			"flashcard": {
+				"title": "CW略語・Q符号",
+				"description": "CW通信で使用される略語とQ符号を学習"
+			},
+			"morseCard": {
+				"title": "モールス符号フラッシュカード",
+				"description": "欧文・数字・記号のモールス符号をカード形式で学習"
+			},
+			"koch": {
+				"title": "コッホ法トレーニング",
+				"description": "段階的に文字を増やして学習する方式"
+			},
+			"listening": {
+				"title": "モールス信号聞き取り練習",
+				"description": "ランダムQSOや英文を聞いて練習"
+			}
+		}
+	},
+	"verticalKey": {
+		"title": "縦振り電鍵練習",
+		"instructions": "スペースキーまたは画面タップで練習",
+		"keyLabel": "(クリック/タップで送信)",
+		"morseSignal": "モールス信号",
+		"morseBufferPlaceholder": "（ここにモールス符号が表示されます）",
+		"decodedResult": "デコード結果",
+		"decodedTextPlaceholder": "（ここにデコードされた文字が表示されます）",
+		"currentSpeed": "現在の速度",
+		"keyState": "キー状態",
+		"released": "解放",
+		"pressed": "押下中",
+		"charCount": "入力文字数",
+		"timingEvaluation": "タイミング評価",
+		"latestInput": "最新の入力",
+		"waitingForInput": "（入力待ち）",
+		"overallStats": "全体統計",
+		"noStatsData": "（統計データなし）",
+		"ditStats": "短点 (・) 統計",
+		"dahStats": "長点 (ー) 統計",
+		"dit": "短点 (・)",
+		"dah": "長点 (ー)",
+		"noData": "（データなし）",
+		"howToUse": "使い方",
+		"instruction1": "スペースキーまたは画面のボタンを押している間、モールス信号が送信されます",
+		"instruction2": "短く押すと「・」(dit)、長く押すと「ー」(dah)になります",
+		"instruction3": "文字間は自動的に判定されます",
+		"instruction4": "WPM（Words Per Minute）で速度を調整できます",
+		"instruction5": "画面右上の⚙アイコンから音量・周波数・速度を調整できます",
+		"instruction6": "音声が鳴らない場合は、一度ボタンをクリックしてください（ブラウザのオーディオポリシー）",
+		"element": "要素:",
+		"expected": "理論値:",
+		"actual": "実測値:",
+		"accuracy": "精度:",
+		"error": "誤差:",
+		"longer": "長い",
+		"shorter": "短い",
+		"perfect": "完璧",
+		"avgAccuracy": "平均精度:",
+		"maxAccuracy": "最高精度:",
+		"minAccuracy": "最低精度:",
+		"avgError": "平均誤差:",
+		"count": "回数",
+		"avgDuration": "平均長さ",
+		"inputCount": "入力数:",
+		"times": "回"
+	},
+	"horizontalKey": {
+		"title": "横振り電鍵練習",
+		"instructions": "左右のパドルを操作して練習",
+		"leftPaddle": "左パドル (短点)",
+		"rightPaddle": "右パドル (長点)",
+		"dit": "DIT",
+		"dah": "DAH",
+		"ditLabel": "(短点)",
+		"dahLabel": "(長点)",
+		"jKey": "J キー",
+		"kKey": "K キー",
+		"morseSignal": "モールス信号",
+		"morseBufferPlaceholder": "（ここにモールス符号が表示されます）",
+		"decodedResult": "デコード結果",
+		"decodedTextPlaceholder": "（ここにデコードされた文字が表示されます）",
+		"clear": "クリア",
+		"currentSpeed": "現在の速度",
+		"iambicMode": "Iambicモード",
+		"charCount": "入力文字数",
+		"timingDiagramTitle": "タイミング図（直前の1文字）",
+		"timingDiagramPlaceholder": "（文字が確定すると表示されます）",
+		"mode": "モード",
+		"modeA": "Iambic A",
+		"modeB": "Iambic B",
+		"spacingEvaluation": "スペーシング評価",
+		"avgAccuracy": "平均精度",
+		"avgError": "平均誤差",
+		"evaluationCount": "評価数",
+		"charSpacing": "文字間",
+		"wordSpacing": "単語間",
+		"expected": "期待値:",
+		"accuracy": "精度:",
+		"error": "誤差:",
+		"count": "回数:",
+		"howToUse": "使い方",
+		"instruction1": "左パドル（J）: 短点（・）/ 右パドル（K）: 長点（ー）",
+		"instruction2": "両方同時押しで自動交互送信（Iambic）",
+		"instruction3": "Iambic Bモード: スクイーズ後1要素追加送信",
+		"instruction4": "画面右上の⚙アイコンから設定（WPM、Iambicモード、パドルレイアウト、音量・周波数）を変更できます",
+		"timingDiagram": "タイミング図",
+		"debugInfo": "デバッグ情報",
+		"paddleInput": "パドル入力",
+		"ditInput": "Dit入力",
+		"dahInput": "Dah入力",
+		"output": "出力",
+		"squeezeZone": "スクイーズ区間",
+		"gapZone": "無入力期間",
+		"press": "押下",
+		"release": "解放",
+		"squeezeOn": "Squeeze ON",
+		"squeezeOff": "Squeeze OFF",
+		"gapOn": "Gap ON",
+		"gapOff": "Gap OFF",
+		"noPaddleInputData": "（パドル入力データなし）",
+		"noEvent": "（イベントなし）",
+		"noSqueeze": "（スクイーズなし）",
+		"noGap": "（ギャップなし）",
+		"relativeTime": "相対時刻"
+	},
+	"flashcard": {
+		"title": "CW略語・Q符号学習",
+		"loading": "フラッシュカードデータを読み込み中...",
+		"loadError": "データの読み込みに失敗しました。",
+		"error": "エラー:",
+		"tabs": {
+			"browse": "一覧",
+			"learn": "学習モード",
+			"exam": "試験モード"
+		},
+		"filter": {
+			"title": "フィルター設定",
+			"tagLabel": "タグで絞り込み",
+			"frequencyLabel": "使用頻度で絞り込み",
+			"frequencySummary": "5: 最重要・固定 / 4: 実QSO頻出 / 3: 一般語・周辺語 / 2: 低頻度・場面依存 / 1: 古風・特殊・狭義",
+			"frequencyCriteria": {
+				"1": "古風、特殊用途、通常 QSO でほぼ出ない、または意味が狭い略語",
+				"2": "低頻度だが場面によっては使う略語",
+				"3": "覚えておくと役立つ一般語・周辺語",
+				"4": "実 QSO でよく見る語",
+				"5": "前に指定された最重要語、固定"
+			},
+			"searchLabel": "検索（略語・意味・タグ）",
+			"searchPlaceholder": "例: QTH, location, Q符号",
+			"filteredCount": "該当:",
+			"totalCount": "全体:",
+			"items": "件"
+		},
+		"browse": {
+			"entriesHeader": "略語一覧",
+			"entriesCount": "件",
+			"toggleList": "📋 リスト表示",
+			"toggleCard": "🃏 カード表示",
+			"examplePrefix": "例: ",
+			"tableHeaders": {
+				"abbreviation": "略語",
+				"english": "英文",
+				"japanese": "和訳",
+				"frequency": "頻度",
+				"tags": "タグ",
+				"description": "説明",
+				"example": "具体例"
+			},
+			"howToUse": "使い方",
+			"instruction1": "タグ、使用頻度、検索で略語を絞り込めます",
+			"instruction2": "略語カードをクリックするとモールス信号を再生できます",
+			"instruction3": "カード表示とリスト表示を切り替えられます",
+			"instruction4": "「学習モード」タブでフラッシュカード学習ができます",
+			"instruction5": "「試験モード」タブで理解度テストができます",
+			"instruction6": "画面右上の⚙アイコンから音量・周波数・速度を調整できます"
+		},
+		"learn": {
+			"setupTitle": "学習設定",
+			"modeLabel": "モード",
+			"reviewMode": "復習モード（わからないカードのみ:",
+			"reviewModeCount": "件）",
+			"questionTypeLabel": "出題形式",
+			"questionTypes": {
+				"abbrToMeaning": "略語→意味（基本）",
+				"meaningToAbbr": "意味→略語（応用）",
+				"morseToAbbr": "モールス音→略語（実践）",
+				"morseToMeaning": "モールス音→意味（実践）"
+			},
+			"availableCards": "学習可能:",
+			"cardsUnit": "枚",
+			"startButton": "学習開始",
+			"clearProgressButton": "進捗をリセット",
+			"backToSetup": "← 設定に戻る",
+			"progressIndicator": " / ",
+			"cardLabels": {
+				"abbreviation": "略語",
+				"meaning": "意味",
+				"morseToAbbrPrompt": "モールス音を聞いて略語を答えてください",
+				"morseToMeaningPrompt": "モールス音を聞いて意味を答えてください"
+			},
+			"playMorseButton": "🔊 モールス再生",
+			"flipToAnswer": "正解を確認する",
+			"flipToQuestion": "問題に戻る",
+			"spaceHint": "(Space)",
+			"judgmentButtons": {
+				"unknown": "× わからない",
+				"known": "○ わかる"
+			},
+			"navigation": {
+				"prev": "← 前のカード",
+				"next": "次のカード →"
+			},
+			"confirmReset": "学習進捗をリセットしますか？",
+			"noCards": "学習可能なカードがありません。",
+			"completed": "学習完了しました！",
+			"howToUse": "使い方",
+			"instruction1": "フィルターで学習する略語を絞り込みます",
+			"instruction2": "出題形式を選択します（略語→意味、意味→略語、モールス音からの解読）",
+			"instruction3": "カードをクリックで裏返し、「わかる」「わからない」で進捗を記録",
+			"instruction4": "復習モードで「わからない」カードのみを学習できます",
+			"instruction5": "学習進捗はブラウザに自動保存されます"
+		},
+		"exam": {
+			"setupTitle": "出題形式",
+			"questionTypeLabel": "出題形式",
+			"questionTypes": {
+				"abbrToMeaning": "略語→意味（基礎）",
+				"meaningToAbbr": "意味→略語（応用）",
+				"morseToAbbr": "モールス音→略語（実践）",
+				"morseToMeaning": "モールス音→意味（実践）"
+			},
+			"questionCountLabel": "問題数",
+			"questionCounts": {
+				"five": "5問",
+				"ten": "10問",
+				"twenty": "20問",
+				"fifty": "50問",
+				"all": "全問"
+			},
+			"startButton": "試験開始",
+			"titleInProgress": "CW略語・Q符号学習 - 試験中",
+			"interruptButton": "中断",
+			"questionProgress": "問題",
+			"questionTemplates": {
+				"abbrToMeaning": "次の略語の意味は？",
+				"meaningToAbbr": "次の意味を表す略語は？",
+				"morseToAbbr": "モールス音を聞いて、対応する略語は？",
+				"morseToMeaning": "モールス音を聞いて、対応する意味は？"
+			},
+			"replayButton": "🔊 もう一度再生",
+			"confirmInterrupt": "試験を中断してメニューに戻りますか？",
+			"noEntries": "該当するエントリーがありません。フィルターを調整してください。",
+			"invalidCount": "問題数を1以上に設定してください。",
+			"howToUse": "使い方",
+			"instruction1": "フィルターで出題範囲を絞り込みます",
+			"instruction2": "出題形式を選択します（略語→意味、意味→略語、モールス音から）",
+			"instruction3": "問題数を選択します（5問〜全問）",
+			"instruction4": "4つの選択肢から正解を選びます",
+			"instruction5": "80%以上で合格です"
+		},
+		"result": {
+			"title": "CW略語・Q符号学習 - 結果",
+			"passed": "合格！",
+			"failed": "不合格",
+			"scoreDetail": " / ",
+			"scoreUnit": "問正解",
+			"wrongAnswersTitle": "間違えた問題（",
+			"wrongAnswersCount": "件）",
+			"yourAnswer": "あなたの回答:",
+			"correctAnswer": "正解:",
+			"perfectScore": "すべて正解しました！",
+			"retryButton": "もう一度",
+			"backToSetupButton": "設定に戻る"
+		}
+	},
+	"koch": {
+		"title": "コッホ法トレーニング",
+		"tabs": {
+			"learning": "基本学習",
+			"custom": "任意文字列練習"
+		},
+		"learning": {
+			"lessonTitle": "レッスン",
+			"lessonProgress": " / 40",
+			"learnedChars": "学習文字:",
+			"startPractice": "練習開始",
+			"lessonListTitle": "レッスン一覧",
+			"howToUse": "使い方",
+			"instruction1": "「練習開始」をクリックしてモールス信号を聞く",
+			"instruction2": "聞こえた文字を入力",
+			"instruction3": "90%以上の正答率で次のレッスンへ"
+		},
+		"custom": {
+			"title": "任意文字列練習モード",
+			"selectPrompt": "練習したい文字を選択してください（最低2文字）",
+			"startPractice": "練習開始",
+			"howToUse": "使い方",
+			"instruction1": "練習したい文字をクリックして選択",
+			"instruction2": "2文字以上選択すると練習開始可能",
+			"instruction3": "選択した文字のみでランダムな練習問題が生成されます"
+		},
+		"practice": {
+			"ready": "準備完了 - 再生ボタンを押してください",
+			"progress": "進行:",
+			"inputPlaceholder": "聞こえた文字を入力...",
+			"customInputPlaceholder": "聞こえた文字を入力してください...",
+			"showResult": "結果を見る",
+			"playButton": "再生",
+			"pauseButton": "一時停止",
+			"stopButton": "停止"
+		},
+		"keyboard": {
+			"header": "グループベースキーボード（学習済み文字のみ有効）",
+			"space": "スペース",
+			"backspace": "1字削除",
+			"groupLabel": "G"
+		},
+		"result": {
+			"passed": "合格！",
+			"failed": "不合格",
+			"accuracy": "正答率:",
+			"sent": "送信:",
+			"input": "入力:",
+			"noInput": "（未入力）",
+			"nextLesson": "次のレッスンへ",
+			"retry": "もう一度",
+			"customTitle": "練習結果",
+			"yourInput": "あなたの入力:",
+			"back": "戻る"
+		}
+	},
+	"listening": {
+		"title": "モールス信号聞き取り練習",
+		"types": {
+			"qso": "QSO練習",
+			"text": "英文練習",
+			"random": "ランダム文字列"
+		},
+		"generate": "生成",
+		"play": "再生",
+		"pause": "一時停止",
+		"stop": "停止",
+		"showText": "テキスト表示",
+		"hideText": "テキスト非表示",
+		"downloadAudio": "音声ダウンロード",
+		"qsoType": {
+			"rubberStamp": "ラバースタンプQSO",
+			"random": "ランダムQSO"
+		},
+		"textType": {
+			"news": "ニュース文",
+			"literature": "文学",
+			"technical": "技術文"
+		},
+		"categories": {
+			"qso": "ラバースタンプQSO",
+			"text100": "英文100字",
+			"text200": "英文200字",
+			"text300": "英文300字",
+			"custom": "ユーザー定義"
+		},
+		"templates": {
+			"randomQso": "ランダムQSO生成",
+			"randomQsoDescription": "コールサイン、地名、名前、RSレポート、リグなどがランダムに生成された完全なQSOが作成されます。毎回異なる内容で練習できます。",
+			"qsoRubberstamp1": "ラバースタンプQSO例: 完全な交信",
+			"qsoShort1": "QSO例: 短い交信（CQ呼び出しと応答）",
+			"qsoShort2": "QSO例: 挨拶と信号報告のみ",
+			"text1001": "英文例1: 自己紹介",
+			"text1002": "英文例2: 天気",
+			"text1003": "英文例3: 趣味",
+			"text2001": "英文例1: アマチュア無線の歴史",
+			"text2002": "英文例2: 旅行の思い出",
+			"text3001": "英文例1: モールス符号の学習",
+			"text3002": "英文例2: 無線交信の楽しみ"
+		},
+		"customTemplate": {
+			"createTitle": "テンプレート新規作成",
+			"editTitle": "テンプレート編集",
+			"titleLabel": "タイトル:",
+			"titlePlaceholder": "タイトルを入力",
+			"contentLabel": "内容:",
+			"contentPlaceholder": "モールス信号に変換するテキストを入力",
+			"requiredAlert": "タイトルと内容を入力してください",
+			"deleteConfirm": "この定型文を削除しますか?",
+			"empty": "定型文がありません",
+			"createButton": "新規作成",
+			"selectButton": "選択",
+			"editButton": "編集",
+			"deleteButton": "削除"
+		},
+		"practice": {
+			"backToList": "一覧に戻る",
+			"playTitle": "再生",
+			"pauseTitle": "一時停止",
+			"stopTitle": "停止",
+			"downloadTitle": "WAVファイルとしてダウンロード",
+			"inputLabel": "聞き取った内容を入力してください:",
+			"inputPlaceholder": "聞き取った文字を入力...",
+			"checkButton": "採点",
+			"showAnswer": "正解を表示",
+			"hideAnswer": "正解を非表示",
+			"answerTitle": "正解",
+			"resultTitle": "結果",
+			"accuracy": "正答率:",
+			"correctText": "正解:",
+			"inputText": "入力:",
+			"noInput": "（未入力）",
+			"normalView": "通常表示",
+			"dialogView": "対話形式で表示",
+			"wavError": "WAVファイルの生成に失敗しました。"
+		}
+	},
+	"settings": {
+		"title": "設定",
+		"audio": {
+			"title": "音声設定",
+			"frequency": "周波数",
+			"frequencyValue": "{value} Hz",
+			"volume": "音量",
+			"volumeValue": "{value}%",
+			"wpm": "速度（WPM）",
+			"wpmValue": "{value} WPM",
+			"characterSpeed": "文字速度 (WPM)",
+			"effectiveSpeed": "実効速度 (WPM)",
+			"bFrequency": "周波数 B側 (Hz)",
+			"testPlay": "テスト再生"
+		},
+		"keybindings": {
+			"title": "キーバインド",
+			"leftPaddle": "左パドル",
+			"rightPaddle": "右パドル",
+			"straightKey": "縦振り電鍵",
+			"pressKey": "キーを押してください",
+			"clickToSet": "クリックしてキーを押す",
+			"paddleLayout": "パドルレイアウト",
+			"paddleLayoutNormal": "標準（左=dit / 右=dah）",
+			"paddleLayoutReversed": "反転（左=dah / 右=dit）"
+		},
+		"practice": {
+			"duration": "練習時間 (秒: 30-300)",
+			"groupSize": "グループサイズ (文字: 3-10)",
+			"showInput": "入力を表示"
+		},
+		"display": {
+			"title": "表示設定",
+			"theme": "テーマ",
+			"fontSize": "フォントサイズ",
+			"light": "ライト",
+			"dark": "ダーク"
+		},
+		"saveSuccess": "設定を保存しました",
+		"resetToDefault": "デフォルトに戻す"
+	},
+	"errors": {
+		"audioContextFailed": "音声コンテキストの初期化に失敗しました",
+		"fileLoadFailed": "ファイルの読み込みに失敗しました",
+		"invalidInput": "無効な入力です",
+		"networkError": "ネットワークエラーが発生しました",
+		"unknownError": "不明なエラーが発生しました"
+	},
+	"morseCard": {
+		"title": "モールス符号フラッシュカード",
+		"loading": "モールス符号カードを読み込み中...",
+		"loadError": "モールス符号カードの読み込みに失敗しました。",
+		"play": "再生",
+		"soundPrompt": "音を聞いて答えてください",
+		"tabs": {
+			"browse": "一覧",
+			"learn": "学習モード",
+			"exam": "試験モード"
+		},
+		"categories": {
+			"letter": "英字",
+			"number": "数字",
+			"symbol": "記号"
+		},
+		"filter": {
+			"title": "フィルター設定",
+			"category": "種別で絞り込み",
+			"difficulty": "難易度で絞り込み",
+			"search": "検索",
+			"searchPlaceholder": "例: A, .-, 疑問符",
+			"filteredCount": "該当:",
+			"totalCount": "全体:"
+		},
+		"browse": {
+			"entries": "モールス符号一覧",
+			"toggleList": "リスト表示",
+			"toggleCard": "カード表示"
+		},
+		"table": {
+			"character": "文字",
+			"morse": "モールス符号",
+			"category": "種別",
+			"difficulty": "難易度",
+			"description": "説明"
+		},
+		"questionTypes": {
+			"char-to-morse": "文字→符号",
+			"morse-to-char": "符号→文字",
+			"sound-to-char": "音→文字",
+			"sound-to-morse": "音→符号"
+		},
+		"learn": {
+			"setupTitle": "学習設定",
+			"questionTypeLabel": "出題形式",
+			"reviewMode": "復習モード（苦手カード）:",
+			"availableCards": "学習可能:",
+			"start": "学習開始",
+			"clearProgress": "進捗をリセット",
+			"confirmReset": "学習進捗をリセットしますか？",
+			"question": "問題",
+			"answer": "答え",
+			"showAnswer": "答えを見る",
+			"hideAnswer": "問題に戻る",
+			"known": "知っている",
+			"unknown": "苦手",
+			"backToSetup": "設定に戻る"
+		},
+		"exam": {
+			"setupTitle": "試験設定",
+			"questionTypeLabel": "出題形式",
+			"questionCount": "問題数",
+			"all": "全問",
+			"start": "試験開始"
+		},
+		"result": {
+			"passed": "合格",
+			"failed": "復習が必要",
+			"wrongAnswers": "間違えたカード",
+			"yourAnswer": "回答",
+			"correctAnswer": "正解",
+			"perfect": "全問正解です",
+			"retry": "もう一度",
+			"backToSetup": "設定に戻る"
+		}
+	}
+}

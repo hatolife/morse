@@ -26,6 +26,15 @@
 ## バージョン
 
 ### 最新版
+- **[v13 - モールス符号フラッシュカード版](https://morse.hato.life/v13/)** - 欧文・数字・記号のモールス符号をカード形式で学習
+  - [モールス符号フラッシュカード](https://morse.hato.life/v13/#morse-card) - 一覧/学習/試験モード、音声出題、苦手カード復習
+  - [CW略語・Q符号学習](https://morse.hato.life/v13/#flashcard) - 500語以上、閲覧/学習/試験モード
+  - [コッホ法トレーニング](https://morse.hato.life/v13/#koch) - レッスン1-40、カスタム文字選択
+  - [モールス信号聞き取り練習](https://morse.hato.life/v13/#listening) - QSO生成、音声ダウンロード
+  - [横振り電鍵練習](https://morse.hato.life/v13/#horizontal-key) - タイミング評価機能付き、Iambic A/B対応
+  - [縦振り電鍵練習](https://morse.hato.life/v13/#vertical-key) - タイミング評価機能付き
+
+### 過去バージョン
 - **[v11 - タイミング評価版](https://morse.hato.life/v11/)** - 電鍵操作のタイミング精度評価機能を追加 (更新: 2025-10-22)
   - [README](v11/app/README.md) - セットアップ手順と機能詳細
   - **新機能**: 縦振り・横振り電鍵にタイミング評価機能を追加
@@ -45,8 +54,6 @@
   - [モールス信号聞き取り練習](https://morse.hato.life/v11/#listening) - QSO生成、音声ダウンロード
   - [横振り電鍵練習](https://morse.hato.life/v11/#horizontal-key) - **タイミング評価機能付き + タイミング図**、Iambic A/B対応
   - [縦振り電鍵練習](https://morse.hato.life/v11/#vertical-key) - **タイミング評価機能付き**
-
-### 過去バージョン
 - **[v10 - GUI/エンジン分離版](https://morse.hato.life/v10/)** - モールス信号エンジンのライブラリ化、全機能v9互換
   - [README](v10/README.md) - アーキテクチャ設計とライブラリAPI仕様
   - **アーキテクチャ**: GUI層とエンジン層を分離、`morse-engine`として独立したライブラリを提供

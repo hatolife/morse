@@ -1,0 +1,27 @@
+{
+	"name": "morse-app",
+	"version": "1.0.0",
+	"description": "モールス練習アプリケーション（タイミング評価機能付き） - GUIフロントエンド",
+	"type": "module",
+	"scripts": {
+		"dev": "vite --host 0.0.0.0 --port 3000",
+		"build": "tsc && vite build && npm run copy-to-root",
+		"build:check": "npm run build && sh -c 'status=$(git -C ../.. status --porcelain -- v13/index.html v13/flashcard.tsv v13/morse-flashcard.tsv v13/assets); test -z \"$status\" || { printf \"%s\\n\" \"$status\"; exit 1; }'",
+		"copy-to-root": "rm -rf ../assets && cp -r dist/index.html dist/flashcard.tsv dist/morse-flashcard.tsv dist/assets ../",
+		"preview": "vite preview",
+		"type-check": "tsc --noEmit",
+		"test:e2e": "TMPDIR=/tmp playwright test",
+		"test:e2e:ui": "TMPDIR=/tmp playwright test --ui",
+		"test:e2e:headed": "TMPDIR=/tmp playwright test --headed",
+		"test:e2e:report": "playwright show-report playwright-report"
+	},
+	"dependencies": {
+		"morse-engine": "file:../lib"
+	},
+	"devDependencies": {
+		"@playwright/test": "^1.56.1",
+		"terser": "^5.44.0",
+		"typescript": "^5.3.3",
+		"vite": "^7.1.10"
+	}
+}

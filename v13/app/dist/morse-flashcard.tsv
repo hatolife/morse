@@ -1,0 +1,50 @@
+category	difficulty	character	morse	label	description
+letter	1	E	.	E	短点1つ
+letter	1	T	-	T	長点1つ
+letter	1	I	..	I	短点2つ
+letter	1	M	--	M	長点2つ
+letter	1	A	.-	A	短点、長点
+letter	1	N	-.	N	長点、短点
+letter	2	S	...	S	短点3つ
+letter	2	O	---	O	長点3つ
+letter	2	U	..-	U	短点、短点、長点
+letter	2	R	.-.	R	短点、長点、短点
+letter	2	W	.--	W	短点、長点、長点
+letter	2	D	-..	D	長点、短点、短点
+letter	2	K	-.-	K	長点、短点、長点
+letter	2	G	--.	G	長点、長点、短点
+letter	3	H	....	H	短点4つ
+letter	3	V	...-	V	短点3つ、長点
+letter	3	F	..-.	F	短点、短点、長点、短点
+letter	3	L	.-..	L	短点、長点、短点、短点
+letter	3	P	.--.	P	短点、長点、長点、短点
+letter	3	J	.---	J	短点、長点3つ
+letter	3	B	-...	B	長点、短点3つ
+letter	3	X	-..-	X	長点、短点、短点、長点
+letter	3	C	-.-.	C	長点、短点、長点、短点
+letter	3	Y	-.--	Y	長点、短点、長点、長点
+letter	3	Z	--..	Z	長点2つ、短点2つ
+letter	3	Q	--.-	Q	長点2つ、短点、長点
+number	4	1	.----	1	数字1
+number	4	2	..---	2	数字2
+number	4	3	...--	3	数字3
+number	4	4	....-	4	数字4
+number	4	5	.....	5	数字5
+number	4	6	-....	6	数字6
+number	4	7	--...	7	数字7
+number	4	8	---..	8	数字8
+number	4	9	----.	9	数字9
+number	4	0	-----	0	数字0
+symbol	5	.	.-.-.-	period	ピリオド
+symbol	5	,	--..--	comma	カンマ
+symbol	5	:	---...	colon	コロン
+symbol	5	?	..--..	question mark	疑問符
+symbol	5	+	.-.-.	plus	プラス
+symbol	5	-	-....-	hyphen	ハイフン
+symbol	5	×	-..-	multiplication sign	乗算記号
+symbol	5	/	-..-.	slash	スラッシュ
+symbol	5	@	.--.-.	at sign	アットマーク
+symbol	5	(	-.--.	left parenthesis	左括弧
+symbol	5	)	-.--.-	right parenthesis	右括弧
+symbol	5	"	.-..-.	double quote	ダブルクォート
+symbol	5	'	.----.	single quote	シングルクォート

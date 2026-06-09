@@ -53,3 +53,11 @@ v12/app/playwright-report/
 v12/lib/node_modules/
 v12/lib/dist/
 v12/lib/coverage/
+
+# v13 build artifacts
+v13/app/node_modules/
+v13/app/.vite/
+v13/app/test-results/
+v13/app/playwright-report/
+v13/lib/node_modules/
+v13/lib/coverage/
