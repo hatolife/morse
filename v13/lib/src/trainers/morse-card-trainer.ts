@@ -130,9 +130,6 @@ export class MorseCardTrainer {
 		const sorted = [...entries];
 		const factor = direction === 'asc' ? 1 : -1;
 		sorted.sort((a, b) => {
-			if (column === 'difficulty') {
-				return (a.difficulty - b.difficulty) * factor;
-			}
 			return String(a[column]).localeCompare(String(b[column]), 'ja') * factor;
 		});
 		return sorted;
@@ -159,5 +156,5 @@ export class MorseCardTrainer {
 	}
 }
 
-export type MorseCardSortColumn = 'character' | 'morse' | 'category' | 'difficulty';
+export type MorseCardSortColumn = 'character' | 'morse' | 'category';
 export type MorseCardSortDirection = 'asc' | 'desc';

@@ -414,7 +414,6 @@ export class MorseCardView implements View {
 							${this.renderSortableHeader('character', t('morseCard.table.character'))}
 							${this.renderSortableHeader('morse', t('morseCard.table.morse'))}
 							${this.renderSortableHeader('category', t('morseCard.table.category'))}
-							${this.renderSortableHeader('difficulty', t('morseCard.table.difficulty'))}
 							<th>${t('morseCard.table.description')}</th>
 						</tr>
 					</thead>
@@ -424,7 +423,6 @@ export class MorseCardView implements View {
 								<td><button class="abbr-play-btn" data-morse="${this.escapeAttr(entry.morse)}">${entry.character}</button></td>
 								<td class="morse-code-text">${entry.morse}</td>
 								<td>${t(`morseCard.categories.${entry.category}`)}</td>
-								<td>${entry.difficulty}</td>
 								<td>${entry.description}</td>
 							</tr>
 						`).join('')}

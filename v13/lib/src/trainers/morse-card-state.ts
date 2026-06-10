@@ -82,10 +82,11 @@ export class MorseCardState {
 
 	static loadViewState(): MorseCardViewState {
 		const data = this.getJson<Partial<MorseCardViewState>>('viewState');
+		const sortColumn = data?.sortColumn;
 		return {
 			viewMode: data?.viewMode || 'browse',
 			displayMode: data?.displayMode || 'card',
-			sortColumn: data?.sortColumn || 'character',
+			sortColumn: sortColumn === 'morse' || sortColumn === 'category' ? sortColumn : 'character',
 			sortDirection: data?.sortDirection || 'asc',
 			learnQuestionType: data?.learnQuestionType || 'char-to-morse',
 			examQuestionType: data?.examQuestionType || 'char-to-morse'
