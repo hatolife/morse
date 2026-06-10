@@ -6,8 +6,8 @@
 	"scripts": {
 		"dev": "vite --host 0.0.0.0 --port 3000",
 		"build": "tsc && vite build && npm run copy-to-root",
-		"build:check": "npm run build && sh -c 'status=$(git -C ../.. status --porcelain -- v13/index.html v13/flashcard.tsv v13/morse-flashcard.tsv v13/assets); test -z \"$status\" || { printf \"%s\\n\" \"$status\"; exit 1; }'",
-		"copy-to-root": "rm -rf ../assets && cp -r dist/index.html dist/flashcard.tsv dist/morse-flashcard.tsv dist/assets ../",
+		"build:check": "npm run build && sh -c 'status=$(git -C ../.. status --porcelain -- v13/index.html v13/flashcard.tsv v13/morse-flashcard.tsv v13/favicon.ico v13/icon.svg v13/assets); test -z \"$status\" || { printf \"%s\\n\" \"$status\"; exit 1; }'",
+		"copy-to-root": "rm -rf ../assets && cp -r dist/index.html dist/flashcard.tsv dist/morse-flashcard.tsv dist/favicon.ico dist/icon.svg dist/assets ../",
 		"preview": "vite preview",
 		"type-check": "tsc --noEmit",
 		"test:e2e": "TMPDIR=/tmp playwright test",

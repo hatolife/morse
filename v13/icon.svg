@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Morse trainer icon">
+	<rect width="256" height="256" rx="56" fill="#0f766e"/>
+	<circle cx="62" cy="70" r="15" fill="#f8fafc"/>
+	<rect x="92" y="55" width="88" height="30" rx="15" fill="#f8fafc"/>
+	<circle cx="207" cy="70" r="15" fill="#f8fafc"/>
+	<rect x="45" y="119" width="74" height="31" rx="15.5" fill="#facc15"/>
+	<rect x="137" y="119" width="74" height="31" rx="15.5" fill="#facc15"/>
+	<circle cx="62" cy="187" r="15" fill="#f8fafc"/>
+	<rect x="92" y="172" width="88" height="30" rx="15" fill="#f8fafc"/>
+	<circle cx="207" cy="187" r="15" fill="#f8fafc"/>
+</svg>
