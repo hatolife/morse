@@ -419,7 +419,7 @@ export class MorseCardView implements View {
 					</thead>
 					<tbody>
 						${this.filteredEntries.map(entry => `
-							<tr>
+							<tr data-morse="${this.escapeAttr(entry.morse)}">
 								<td><button class="abbr-play-btn" data-morse="${this.escapeAttr(entry.morse)}">${entry.character}</button></td>
 								<td class="morse-code-text">${entry.morse}</td>
 								<td>${t(`morseCard.categories.${entry.category}`)}</td>
@@ -484,8 +484,11 @@ export class MorseCardView implements View {
 	}
 
 	private attachEntryListeners(): void {
-		document.querySelectorAll<HTMLElement>('[data-morse]').forEach(element => {
-			element.addEventListener('click', () => this.playMorse(element.dataset.morse || ''));
+		document.querySelectorAll<HTMLElement>('.entry-card[data-morse], .abbr-play-btn[data-morse], tbody tr[data-morse]').forEach(element => {
+			element.addEventListener('click', event => {
+				if (element.classList.contains('abbr-play-btn')) event.stopPropagation();
+				this.playMorse(element.dataset.morse || '');
+			});
 		});
 		document.getElementById('toggle-display-btn')?.addEventListener('click', () => {
 			this.displayMode = this.displayMode === 'card' ? 'list' : 'card';

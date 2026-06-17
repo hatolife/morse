@@ -381,7 +381,7 @@ export class FlashcardView implements View {
 					</thead>
 					<tbody>
 						${this.filteredEntries.map(entry => `
-							<tr>
+							<tr data-abbr="${entry.abbreviation}">
 								<td class="list-abbr">
 									<button class="abbr-play-btn ${this.currentlyPlaying === entry.abbreviation ? 'playing' : ''}" data-abbr="${entry.abbreviation}">
 										${this.formatAbbreviation(entry.abbreviation)}
@@ -412,8 +412,18 @@ export class FlashcardView implements View {
 		//! 略語再生ボタンのイベントリスナー。
 		const playButtons = container.querySelectorAll('.abbr-play-btn');
 		playButtons.forEach(btn => {
-			btn.addEventListener('click', () => {
+			btn.addEventListener('click', (event) => {
+				event.stopPropagation();
 				const abbr = btn.getAttribute('data-abbr');
+				if (abbr) this.playMorse(abbr);
+			});
+		});
+
+		//! 行クリックでもカード表示と同様にモールス再生。
+		const rows = container.querySelectorAll('tbody tr[data-abbr]');
+		rows.forEach(row => {
+			row.addEventListener('click', () => {
+				const abbr = row.getAttribute('data-abbr');
 				if (abbr) this.playMorse(abbr);
 			});
 		});
