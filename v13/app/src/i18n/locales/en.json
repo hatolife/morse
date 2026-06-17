@@ -504,7 +504,15 @@
 		"filter": {
 			"title": "Filter Settings",
 			"category": "Filter by Category",
-			"difficulty": "Filter by Difficulty",
+			"difficulty": "Filter by Importance",
+			"difficultySummary": "5: Essential/basic / 4: Important / 3: Standard / 2: Low-frequency / 1: Special or supplemental",
+			"difficultyCriteria": {
+				"1": "Special or supplemental code",
+				"2": "Low-frequency code",
+				"3": "Standard code",
+				"4": "Important code",
+				"5": "Essential/basic code"
+			},
 			"search": "Search",
 			"searchPlaceholder": "e.g., A, .-, question mark",
 			"filteredCount": "Filtered:",
@@ -519,7 +527,7 @@
 			"character": "Character",
 			"morse": "Morse",
 			"category": "Category",
-			"difficulty": "Difficulty",
+			"difficulty": "Importance",
 			"description": "Description"
 		},
 		"questionTypes": {

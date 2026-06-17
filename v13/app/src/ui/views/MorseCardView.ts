@@ -38,6 +38,7 @@ export class MorseCardView implements View {
 	private filteredEntries: MorseCardEntry[] = [];
 	private currentState: ViewState = 'loading';
 	private selectedCategories: Set<MorseCardCategory>;
+	private selectedDifficulties: Set<number>;
 	private searchQuery: string;
 	private displayMode: MorseCardDisplayMode;
 	private sortColumn: MorseCardSortColumn;
@@ -66,6 +67,7 @@ export class MorseCardView implements View {
 		const viewState = MorseCardState.loadViewState();
 		this.progress = MorseCardState.loadProgress();
 		this.selectedCategories = filters.selectedCategories;
+		this.selectedDifficulties = filters.selectedDifficulties;
 		this.searchQuery = filters.searchQuery;
 		this.displayMode = viewState.displayMode;
 		this.sortColumn = viewState.sortColumn;
@@ -188,7 +190,7 @@ export class MorseCardView implements View {
 						<div class="card-content">
 							<div class="card-label">${this.isFlipped ? t('morseCard.learn.answer') : t('morseCard.learn.question')}</div>
 							<div class="morse-card-main">${this.isFlipped ? back : front}</div>
-							<div class="card-description">${card.description}</div>
+							${this.isFlipped ? `<div class="card-description">${card.description}</div>` : ''}
 						</div>
 					</div>
 					<div class="action-area">
@@ -368,6 +370,19 @@ export class MorseCardView implements View {
 					</div>
 				</div>
 				<div class="filter-group">
+					<label>${t('morseCard.filter.difficulty')}</label>
+					<p class="frequency-summary">${t('morseCard.filter.difficultySummary')}</p>
+					<div class="frequency-filter" id="difficulty-filter">
+						${[5, 4, 3, 2, 1].map(difficulty => `
+							<label class="frequency-checkbox" title="${'★'.repeat(difficulty)}: ${t(`morseCard.filter.difficultyCriteria.${difficulty}`)}" tabindex="0">
+								<input type="checkbox" value="${difficulty}" ${this.selectedDifficulties.has(difficulty) ? 'checked' : ''}>
+								<span>${'★'.repeat(difficulty)}</span>
+								<span class="frequency-tooltip" role="tooltip">${'★'.repeat(difficulty)}: ${t(`morseCard.filter.difficultyCriteria.${difficulty}`)}</span>
+							</label>
+						`).join('')}
+					</div>
+				</div>
+				<div class="filter-group">
 					<label for="search-input">${t('morseCard.filter.search')}</label>
 					<input type="text" id="search-input" class="search-input" value="${this.escapeAttr(this.searchQuery)}" placeholder="${t('morseCard.filter.searchPlaceholder')}">
 				</div>
@@ -473,6 +488,15 @@ export class MorseCardView implements View {
 			const category = target.value as MorseCardCategory;
 			if (target.checked) this.selectedCategories.add(category);
 			else this.selectedCategories.delete(category);
+			this.saveFiltersAndUpdate();
+			afterChange();
+		});
+		document.getElementById('difficulty-filter')?.addEventListener('change', event => {
+			const target = event.target as HTMLInputElement;
+			if (target.type !== 'checkbox') return;
+			const difficulty = Number.parseInt(target.value, 10);
+			if (target.checked) this.selectedDifficulties.add(difficulty);
+			else this.selectedDifficulties.delete(difficulty);
 			this.saveFiltersAndUpdate();
 			afterChange();
 		});
@@ -615,6 +639,7 @@ export class MorseCardView implements View {
 	private saveFiltersAndUpdate(): void {
 		MorseCardState.saveFilters({
 			selectedCategories: this.selectedCategories,
+			selectedDifficulties: this.selectedDifficulties,
 			searchQuery: this.searchQuery
 		});
 		this.updateFilteredEntries();
@@ -622,6 +647,7 @@ export class MorseCardView implements View {
 
 	private updateFilteredEntries(): void {
 		let entries = MorseCardTrainer.filterByCategories(this.allEntries, this.selectedCategories);
+		entries = MorseCardTrainer.filterByDifficulties(entries, this.selectedDifficulties);
 		entries = MorseCardTrainer.filterByQuery(entries, this.searchQuery);
 		this.filteredEntries = MorseCardTrainer.sortEntries(entries, this.sortColumn, this.sortDirection);
 	}

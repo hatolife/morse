@@ -1,57 +1,57 @@
 category	difficulty	character	morse	label	description
-letter	1	E	.	E	短点1つ
-letter	1	T	-	T	長点1つ
-letter	1	I	..	I	短点2つ
-letter	1	M	--	M	長点2つ
-letter	1	A	.-	A	短点、長点
-letter	1	N	-.	N	長点、短点
-letter	2	S	...	S	短点3つ
-letter	2	O	---	O	長点3つ
-letter	2	U	..-	U	短点、短点、長点
-letter	2	R	.-.	R	短点、長点、短点
-letter	2	W	.--	W	短点、長点、長点
-letter	2	D	-..	D	長点、短点、短点
-letter	2	K	-.-	K	長点、短点、長点
-letter	2	G	--.	G	長点、長点、短点
-letter	3	H	....	H	短点4つ
-letter	3	V	...-	V	短点3つ、長点
-letter	3	F	..-.	F	短点、短点、長点、短点
-letter	3	L	.-..	L	短点、長点、短点、短点
-letter	3	P	.--.	P	短点、長点、長点、短点
-letter	3	J	.---	J	短点、長点3つ
-letter	3	B	-...	B	長点、短点3つ
-letter	3	X	-..-	X	長点、短点、短点、長点
-letter	3	C	-.-.	C	長点、短点、長点、短点
-letter	3	Y	-.--	Y	長点、短点、長点、長点
-letter	3	Z	--..	Z	長点2つ、短点2つ
-letter	3	Q	--.-	Q	長点2つ、短点、長点
-number	4	1	.----	1	数字1
-number	4	2	..---	2	数字2
-number	4	3	...--	3	数字3
-number	4	4	....-	4	数字4
-number	4	5	.....	5	数字5
-number	4	6	-....	6	数字6
-number	4	7	--...	7	数字7
-number	4	8	---..	8	数字8
-number	4	9	----.	9	数字9
-number	4	0	-----	0	数字0
+letter	5	E	.	E	短点1つ
+letter	5	T	-	T	長点1つ
+letter	5	I	..	I	短点2つ
+letter	5	M	--	M	長点2つ
+letter	5	A	.-	A	短点、長点
+letter	5	N	-.	N	長点、短点
+letter	5	S	...	S	短点3つ
+letter	5	O	---	O	長点3つ
+letter	5	U	..-	U	短点、短点、長点
+letter	5	R	.-.	R	短点、長点、短点
+letter	5	W	.--	W	短点、長点、長点
+letter	5	D	-..	D	長点、短点、短点
+letter	5	K	-.-	K	長点、短点、長点
+letter	5	G	--.	G	長点、長点、短点
+letter	5	H	....	H	短点4つ
+letter	5	V	...-	V	短点3つ、長点
+letter	5	F	..-.	F	短点、短点、長点、短点
+letter	5	L	.-..	L	短点、長点、短点、短点
+letter	5	P	.--.	P	短点、長点、長点、短点
+letter	5	J	.---	J	短点、長点3つ
+letter	5	B	-...	B	長点、短点3つ
+letter	5	X	-..-	X	長点、短点、短点、長点
+letter	5	C	-.-.	C	長点、短点、長点、短点
+letter	5	Y	-.--	Y	長点、短点、長点、長点
+letter	5	Z	--..	Z	長点2つ、短点2つ
+letter	5	Q	--.-	Q	長点2つ、短点、長点
+number	5	1	.----	1.00	数字1
+number	5	2	..---	2.00	数字2
+number	5	3	...--	3.00	数字3
+number	5	4	....-	4.00	数字4
+number	5	5	.....	5.00	数字5
+number	5	6	-....	6.00	数字6
+number	5	7	--...	7.00	数字7
+number	5	8	---..	8.00	数字8
+number	5	9	----.	9.00	数字9
+number	5	0	-----	0.00	数字0
 symbol	5	.	.-.-.-	period	ピリオド
 symbol	5	,	--..--	comma	カンマ
-symbol	5	:	---...	colon	コロン
 symbol	5	?	..--..	question mark	疑問符
-symbol	5	!	-.-.--	exclamation mark	感嘆符
-symbol	5	=	-...-	equals sign	等号
-symbol	5	+	.-.-.	plus	プラス
-symbol	5	-	-....-	hyphen	ハイフン
-symbol	5	×	-..-	multiplication sign	乗算記号
 symbol	5	/	-..-.	slash	スラッシュ
-symbol	5	@	.--.-.	at sign	アットマーク
-symbol	5	&	.-...	ampersand	アンパサンド
-symbol	5	(	-.--.	left parenthesis	左括弧
-symbol	5	)	-.--.-	right parenthesis	右括弧
 symbol	5	"	.-..-.	double quote	ダブルクォート
 symbol	5	'	.----.	single quote	シングルクォート
 symbol	5	;	-.-.-.	semicolon	セミコロン
-symbol	5	_	..--.-	underscore	アンダースコア
-symbol	5	$	...-..-	dollar sign	ドル記号
-symbol	5	^	......	caret	キャレット
+symbol	4	!	-.-.--	exclamation mark	感嘆符
+symbol	4	@	.--.-.	at sign	アットマーク
+symbol	4	(	-.--.	left parenthesis	左括弧
+symbol	4	)	-.--.-	right parenthesis	右括弧
+symbol	3	=	-...-	equals sign	等号
+symbol	3	+	.-.-.	plus	プラス
+symbol	3	-	-....-	hyphen	ハイフン
+symbol	3	×	-..-	multiplication sign	乗算記号
+symbol	2	&	.-...	ampersand	アンパサンド
+symbol	2	_	..--.-	underscore	アンダースコア
+symbol	2	:	---...	colon	コロン
+symbol	1	$	...-..-	dollar sign	ドル記号
+symbol	1	^	......	caret	キャレット

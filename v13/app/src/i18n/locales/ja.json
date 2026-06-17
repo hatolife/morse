@@ -504,7 +504,15 @@
 		"filter": {
 			"title": "フィルター設定",
 			"category": "種別で絞り込み",
-			"difficulty": "難易度で絞り込み",
+			"difficulty": "重要度で絞り込み",
+			"difficultySummary": "5: 最重要・基本 / 4: 重要 / 3: 標準 / 2: 低頻度 / 1: 特殊・補助",
+			"difficultyCriteria": {
+				"1": "特殊・補助的な符号",
+				"2": "低頻度の符号",
+				"3": "標準的な符号",
+				"4": "重要な符号",
+				"5": "最重要・基本の符号"
+			},
 			"search": "検索",
 			"searchPlaceholder": "例: A, .-, 疑問符",
 			"filteredCount": "該当:",
@@ -519,7 +527,7 @@
 			"character": "文字",
 			"morse": "モールス符号",
 			"category": "種別",
-			"difficulty": "難易度",
+			"difficulty": "重要度",
 			"description": "説明"
 		},
 		"questionTypes": {
