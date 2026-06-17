@@ -25,6 +25,18 @@ describe('MorseCardState', () => {
 
 		const filters = MorseCardState.loadFilters();
 		expect(Array.from(filters.selectedCategories).sort()).toEqual(['letter', 'symbol']);
+		expect(Array.from(filters.selectedDifficulties).sort()).toEqual([1, 2, 3, 4, 5]);
 		expect(filters.searchQuery).toBe('.-');
+	});
+
+	it('saves and loads difficulty filters', () => {
+		MorseCardState.saveFilters({
+			selectedCategories: new Set(['letter']),
+			selectedDifficulties: new Set([5, 3]),
+			searchQuery: ''
+		});
+
+		const filters = MorseCardState.loadFilters();
+		expect(Array.from(filters.selectedDifficulties).sort()).toEqual([3, 5]);
 	});
 });

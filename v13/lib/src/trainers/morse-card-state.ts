@@ -58,10 +58,13 @@ export class MorseCardState {
 		}
 	}
 
-	static saveFilters(filters: MorseCardFilterState): void {
+	static saveFilters(filters: MorseCardFilterState | Omit<MorseCardFilterState, 'selectedDifficulties'>): void {
+		const selectedDifficulties = 'selectedDifficulties' in filters
+			? filters.selectedDifficulties
+			: new Set([5, 4, 3, 2, 1]);
 		this.setJson('filters', {
 			selectedCategories: Array.from(filters.selectedCategories),
-			selectedDifficulties: Array.from(filters.selectedDifficulties),
+			selectedDifficulties: Array.from(selectedDifficulties),
 			searchQuery: filters.searchQuery
 		});
 	}
